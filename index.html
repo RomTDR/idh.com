@@ -2,14 +2,17 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Association des Internes et Anciens Internes des Hôpitaux du Bénin</title>
+  <title>Nouvel Nom de Votre Association</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
+
   <header>
-    <img src="AsInAIHB.png" alt="Logo Association" class="logo" />
-    <h1>Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
+    <a href="https://www.mondomaine.bj/">
+      <img src="AsInAIHB.png" alt="Logo Association" class="logo" />
+    </a>
+    <h1>Nouvel Nom de Votre Association</h1>
     <nav>
       <ul>
         <li><a href="index.html">Accueil</a></li>
@@ -22,44 +25,129 @@
   </header>
 
   <main>
+
+    <!-- Section Qui sommes-nous? -->
+    <section class="qui-sommes-nous">
+      <h2>Qui sommes-nous ?</h2>
+      <ul>
+        <li><a href="#">Bureau</a></li>
+        <li><a href="#">Fonctionnement</a></li>
+        <li><a href="#">Adhésion</a></li>
+      </ul>
+    </section>
+
+    <!-- Mot du président -->
     <section class="mot-president">
       <h2>Mot du Président</h2>
       <div class="carte-president">
         <img src="president.jpg" alt="Photo du Président" class="photo-president" />
         <div class="texte-president">
           <p>
-            Chers consœurs, chers confrères,<br />
-            C’est avec un immense plaisir que je vous souhaite la bienvenue sur la plateforme officielle de l’Association des Internes et Anciens Internes des Hôpitaux.
-            Ce site a été conçu comme un espace d’échange, de valorisation et de diffusion de nos activités scientifiques.
-            Vous y trouverez les publications de nos membres, les annonces de congrès et de journées scientifiques, ainsi que la possibilité de soumettre vos propres travaux.
-            Plus qu’un simple site, cette plateforme est le reflet de notre engagement commun pour l’excellence, la collaboration et le rayonnement scientifique.
-            Je vous invite à vous approprier cet outil, à le faire vivre, et à y contribuer activement.
-            Ensemble, faisons de cette initiative une source d’inspiration et de progression pour toute notre communauté médicale.
+            Chers consœurs, chers confrères,<br>
+            Bienvenue sur la plateforme officielle de l’Association.
+            C’est avec un immense plaisir que je vous souhaite la bienvenue sur la plateforme
+            officielle de l’Association des Internes et Anciens Internes des Hôpitaux. 
+            Ce site a été conçu comme un espace d’échange, de valorisation et de diffusion 
+            de nos activités scientifiques. Vous y trouverez les publications de nos membres, 
+            les annonces de congrès et de journées scientifiques, ainsi que la possibilité de 
+            soumettre vos propres travaux. Plus qu’un simple site, cette plateforme est le reflet 
+            de notre engagement commun pour l’excellence, la collaboration et le rayonnement 
+            scientifique. Je vous invite à vous approprier cet outil, à le faire vivre, et à y
+            contribuer activement. Ensemble, faisons de cette initiative une source d’inspiration
+            et de progression pour toute notre communauté médicale.
           </p>
-          <p><strong>Dr. Yévèdo TOHODJEDE</strong><br />Médecin Pédiatre au CNHU-HKM de Cotonou<br />Président de l’AsInAIHB</p>
+          <p><strong>Dr. Yévèdo TOHODJEDE</strong><br>Médecin Néphropédiatre</p>
+          <p><strong>Président de l’AsInAIHB</p>
         </div>
       </div>
     </section>
 
+    <!-- Infos contact -->
     <section class="infos-contact">
-      <p>Email : asinainb@gmail.com</p>
-      <p>Téléphone : +229 01 40424297</p>
-      <p>Adresse : Cotonou, Bénin</p>
+      <p><strong>Email :</strong> asinainb@gmail.com</p>
+      <p><strong>Téléphone :</strong> +229 01 40424297</p>
+      <p><strong>Adresse :</strong> Cotonou, Bénin</p>
     </section>
+
+    <!-- Section Membres -->
+    <section class="membres-section">
+      <h2>Membres de l’AIAIHB</h2>
+      <button class="btn-toggle" onclick="toggleMembres()">Voir les autres membres ▼</button>
+      <div id="membresCache" class="contenu-cache">
+        <ul class="liste-membres">
+          <li>Prof agrégé ATAIGBA Elie</li>
+          <li>Dr. BOKODAHO David</li>
+          <li>Dr. TOVIWANOU Dègnon Romain</li>
+          <li>IDH. GBESSI Emmanuel</li>
+          <!-- Tu peux ajouter d'autres profils ici -->
+        </ul>
+      </div>
+    </section>
+
+    <!-- Section Espace membre & Newsletter -->
+    <section class="espace-utilisateur">
+      <h2>Espace membre & Newsletter</h2>
+      <div class="cartes-actions">
+        <div class="carte-action">
+          <h3>Créer un compte</h3>
+          <a href="inscription.html" class="btn">Créer un compte</a>
+        </div>
+        <div class="carte-action">
+          <h3>Connexion</h3>
+          <a href="connexion.html" class="btn">Se connecter</a>
+        </div>
+        <div class="carte-action">
+          <h3>Newsletter</h3>
+          <form class="form-newsletter" onsubmit="return false;">
+            <input type="email" placeholder="Votre adresse email" required>
+            <button type="submit">S’inscrire</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accordion Poser une question détaillé -->
+    <section class="faq-section">
+      <button class="accordion" onclick="toggleAccordion(this)">📩 Poser une question à l’association</button>
+      <div class="panel">
+        <p>
+          Vous avez une question, une demande de précision ou une préoccupation ?
+          Écrivez-nous directement à : <strong>asinainb@gmail.com</strong>
+        </p>
+        <p>
+          Nous répondons généralement dans un délai de 48 heures. Merci de mentionner votre nom, votre qualité (interne, consultant, partenaire, etc.) et l’objet de votre question.
+        </p>
+        <p>
+          📬 <a href="mailto:asinainb@gmail.com">Envoyer un email</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Horaires visite -->
+    <section class="horaires-visite">
+      <h2>Heures de visite</h2>
+      <ul>
+        <li><strong>Lundi - Vendredi :</strong> 09h00 - 13h00 et 15h00 - 18h00</li>
+        <li><strong>Samedi :</strong> 10h00 - 13h00</li>
+        <li><strong>Dimanche & jours fériés :</strong> Fermé</li>
+      </ul>
+    </section>
+
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-col logo-visit">
-        <img src="AsInAIHB.png" alt="Logo Association" class="footer-logo" />
+        <img src="AsInAIHB.png" alt="Logo Association" class="footer-logo">
         <p><strong>Localisation :</strong> Cotonou, Bénin</p>
         <p><strong>Heures de visite :</strong></p>
-        <p>Samedi : 08:00 – 13:00</p>
-        <p>Lundi – Vendredi : 08:00 – 18:00</p>
+        <p>Samedi : 08:00 - 13:00</p>
+        <p>Lundi - Vendredi : 08:00 - 18:00</p>
       </div>
 
       <div class="footer-col">
-        <h4>AIAIHB</h4>
+        <h4>AsInAIHB</h4>
         <ul>
           <li><a href="#">Qui sommes-nous ?</a></li>
           <li><a href="#">Bureau</a></li>
@@ -69,7 +157,7 @@
       </div>
 
       <div class="footer-col">
-        <h4> Revue de l'interne Béninois</h4>
+        <h4>Revue de l'Interne Béninois</h4>
         <ul>
           <li><a href="#">Instructions</a></li>
           <li><a href="#">Soumission</a></li>
@@ -86,16 +174,41 @@
         </ul>
       </div>
     </div>
-
     <div class="footer-social">
-      <h4>Social Media</h4>
+      <h4>Suivez-nous</h4>
       <div class="social-icons">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
   </footer>
+
+  <!-- JavaScript Accordion & Toggle Membres -->
+  <script>
+    function toggleAccordion(btn) {
+      const panel = btn.nextElementSibling;
+      const open = panel.style.display === 'block';
+      document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+      document.querySelectorAll('.accordion').forEach(b => b.textContent = '📩 Poser une question à l’association');
+      if (!open) {
+        panel.style.display = 'block';
+        btn.textContent = '❌ Fermer la rubrique';
+      }
+    }
+    function toggleMembres() {
+      const section = document.getElementById('membresCache');
+      const btn = document.querySelector('.btn-toggle');
+      if (section.style.display === 'block') {
+        section.style.display = 'none';
+        btn.textContent = 'Voir les autres membres ▼';
+      } else {
+        section.style.display = 'block';
+        btn.textContent = 'Masquer les membres ▲';
+      }
+    }
+  </script>
+
 </body>
 </html>
