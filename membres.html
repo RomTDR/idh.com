@@ -1,237 +1,273 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espace Membres - AsInAIHB</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Membres - AsInAIHB</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <i class="fas fa-hospital-symbol"></i>
-                <span>AsInAIHB</span>
-            </a>
-            <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="revue.html">Revue de l'Interne</a></li>
-                <li><a href="soumission.html">Soumission</a></li>
-                <li><a href="membres.html" class="active">Espace Membres</a></li>
-                <li id="authLink"><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Connexion</a></li>
-            </ul>
-        </div>
-    </nav>
+  <!-- Bande tricolore Bénin -->
+  <div class="bande-tricolore"></div>
 
-    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
-        
-        <!-- NON CONNECTÉ : Formulaire Auth -->
-        <div id="authSection" class="auth-container">
-            <div class="auth-box">
-                <div class="auth-tabs">
-                    <button class="auth-tab active" data-tab="login">Connexion</button>
-                    <button class="auth-tab" data-tab="register">Inscription</button>
-                </div>
-                
-                <!-- Login Form -->
-                <form id="loginForm" class="auth-form">
-                    <h2><i class="fas fa-sign-in-alt"></i> Connexion Membre</h2>
-                    <p class="form-info">Accédez à votre espace personnel et à l'intégralité des articles.</p>
-                    
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="loginEmail" required placeholder="votre@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Mot de passe</label>
-                        <input type="password" id="loginPassword" required placeholder="••••••••">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">
-                        <i class="fas fa-sign-in-alt"></i> Se connecter
-                    </button>
-                    <p class="form-note">Mot de passe oublié ? <a href="#" id="forgotPassword">Cliquez ici</a></p>
-                    <div id="loginError" class="alert alert-error" style="display:none;"></div>
-                </form>
-                
-                <!-- Register Form -->
-                <form id="registerForm" class="auth-form" style="display:none;">
-                    <h2><i class="fas fa-user-plus"></i> Inscription</h2>
-                    <p class="form-info">Rejoignez la communauté scientifique des internes du Bénin.</p>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Prénom *</label>
-                            <input type="text" id="regFirstName" required placeholder="Prénom">
-                        </div>
-                        <div class="form-group">
-                            <label>Nom *</label>
-                            <input type="text" id="regLastName" required placeholder="Nom">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" id="regEmail" required placeholder="votre@email.com">
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Spécialité *</label>
-                            <select id="regSpecialty" required>
-                                <option value="">Choisir...</option>
-                                <option value="Pediatrie">Pédiatrie</option>
-                                <option value="Chirurgie">Chirurgie</option>
-                                <option value="Gyneco-Obstetrique">Gynéco-Obstétrique</option>
-                                <option value="Medecine interne">Médecine interne</option>
-                                <option value="Sante publique">Santé publique</option>
-                                <option value="Anesthesie">Anesthésie-Réanimation</option>
-                                <option value="Dermatologie">Dermatologie</option>
-                                <option value="Ophtalmologie">Ophtalmologie</option>
-                                <option value="ORL">ORL</option>
-                                <option value="Psychiatrie">Psychiatrie</option>
-                                <option value="Radiologie">Radiologie</option>
-                                <option value="Autre">Autre</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Hôpital d'affectation *</label>
-                            <input type="text" id="regHospital" required placeholder="Ex: CNHU-HKM">
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Année d'internat *</label>
-                            <input type="number" id="regYear" required min="2010" max="2030" placeholder="2024">
-                        </div>
-                        <div class="form-group">
-                            <label>Téléphone</label>
-                            <input type="tel" id="regPhone" placeholder="+229 XX XX XX XX">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Mot de passe * (min. 8 caractères)</label>
-                        <input type="password" id="regPassword" required minlength="8" placeholder="••••••••">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="regTerms" required>
-                            J'accepte les <a href="#">conditions d'utilisation</a> et je certifie être interne ou ancien interne des hôpitaux du Bénin.
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-block">
-                        <i class="fas fa-user-plus"></i> Créer mon compte
-                    </button>
-                    <div id="registerError" class="alert alert-error" style="display:none;"></div>
-                    <div id="registerSuccess" class="alert alert-success" style="display:none;"></div>
-                </form>
-            </div>
-            
-            <div class="auth-info">
-                <h3><i class="fas fa-shield-alt"></i> Avantages Membres</h3>
-                <ul class="benefits-list">
-                    <li><i class="fas fa-check-circle"></i> Accès au texte intégral de tous les articles</li>
-                    <li><i class="fas fa-check-circle"></i> Téléchargement des PDF scientifiques</li>
-                    <li><i class="fas fa-check-circle"></i> Soumission de vos propres travaux</li>
-                    <li><i class="fas fa-check-circle"></i> Participation à la relecture scientifique</li>
-                    <li><i class="fas fa-check-circle"></i> Recevoir les alertes de nouveaux numéros</li>
-                    <li><i class="fas fa-check-circle"></i> Profil public avec vos publications</li>
-                </ul>
-                <div class="auth-note">
-                    <i class="fas fa-info-circle"></i>
-                    <p>Votre inscription sera validée par un administrateur sous 24-48h pour garantir l'authenticité des membres.</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- CONNECTÉ : Dashboard -->
-        <div id="dashboardSection" style="display:none;">
-            <div class="dashboard-header">
-                <div class="dashboard-user">
-                    <div class="user-avatar">
-                        <i class="fas fa-user-md"></i>
-                    </div>
-                    <div class="user-info">
-                        <h2 id="dashName">Dr. Nom Prénom</h2>
-                        <p id="dashMeta">Spécialité • Hôpital</p>
-                        <span class="badge" id="dashRole">Membre</span>
-                    </div>
-                </div>
-                <button id="logoutBtn" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
-            </div>
-            
-            <div class="dashboard-grid">
-                <!-- Stats Cards -->
-                <div class="dash-card">
-                    <div class="dash-card-icon blue"><i class="fas fa-file-alt"></i></div>
-                    <div class="dash-card-content">
-                        <span class="dash-card-num" id="dashArticles">0</span>
-                        <span class="dash-card-label">Mes articles</span>
-                    </div>
-                </div>
-                <div class="dash-card">
-                    <div class="dash-card-icon orange"><i class="fas fa-clock"></i></div>
-                    <div class="dash-card-content">
-                        <span class="dash-card-num" id="dashPending">0</span>
-                        <span class="dash-card-label">En attente</span>
-                    </div>
-                </div>
-                <div class="dash-card">
-                    <div class="dash-card-icon green"><i class="fas fa-check-double"></i></div>
-                    <div class="dash-card-content">
-                        <span class="dash-card-num" id="dashReviews">0</span>
-                        <span class="dash-card-label">Reviews faites</span>
-                    </div>
-                </div>
-                <div class="dash-card">
-                    <div class="dash-card-icon purple"><i class="fas fa-bookmark"></i></div>
-                    <div class="dash-card-content">
-                        <span class="dash-card-num" id="dashFavorites">0</span>
-                        <span class="dash-card-label">Favoris</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dashboard-sections">
-                <div class="dash-section">
-                    <div class="dash-section-header">
-                        <h3><i class="fas fa-file-medical"></i> Mes Articles</h3>
-                        <a href="soumission.html" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Nouveau</a>
-                    </div>
-                    <div id="myArticlesList">
-                        <p class="empty-state">Vous n'avez pas encore soumis d'article. <a href="soumission.html">Soumettre mon premier article →</a></p>
-                    </div>
-                </div>
-                
-                <div class="dash-section">
-                    <div class="dash-section-header">
-                        <h3><i class="fas fa-tasks"></i> Reviews à effectuer</h3>
-                    </div>
-                    <div id="myReviewsList">
-                        <p class="empty-state">Aucune relecture en attente.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- En-tête -->
+  <header class="header-africain">
+    <div class="conteneur-entete">
+      <img src="AsInAIHB.png" alt="Logo Association" class="logo-association" />
+      <h1 class="titre-association">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>© 2026 AsInAIHB - Espace Membres</p>
-            </div>
-        </div>
-    </footer>
+    <nav class="menu-africain">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="revue.html">Publications</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="soumission.html">Soumettre un résumé</a></li>
+        <li><a href="membres.html" class="active btn-login"><i class="fas fa-user"></i> Espace Membre</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/js/js/supabase.js"></script>
-    <script src="js/js/auth.js"></script>
-    <script src="js/js/membres.js"></script>
+  <main>
+    <div class="container" style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+      
+      <!-- Section NON CONNECTÉ -->
+      <div id="authSection">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+          <!-- Formulaire Connexion -->
+          <div class="form-container" style="margin: 0;">
+            <div class="auth-tabs">
+              <button class="auth-tab active" data-tab="login" onclick="showAuthTab('login')">Connexion</button>
+              <button class="auth-tab" data-tab="register" onclick="showAuthTab('register')">Inscription</button>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+              <h2><i class="fas fa-sign-in-alt"></i> Connexion Membre</h2>
+              <div id="loginError" class="alert alert-error" style="display: none;"></div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" required placeholder="votre@email.com">
+              </div>
+              <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" id="loginPassword" required placeholder="••••••••">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+              <p class="text-center mt-20"><a href="#" onclick="forgotPassword(event)" style="color: #004225;">Mot de passe oublié ?</a></p>
+            </form>
+
+            <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
+              <h2><i class="fas fa-user-plus"></i> Inscription</h2>
+              <div id="registerError" class="alert alert-error" style="display: none;"></div>
+              <div id="registerSuccess" class="alert alert-success" style="display: none;"></div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Prénom *</label>
+                  <input type="text" id="regFirstName" required>
+                </div>
+                <div class="form-group">
+                  <label>Nom *</label>
+                  <input type="text" id="regLastName" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Email *</label>
+                <input type="email" id="regEmail" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Spécialité *</label>
+                  <select id="regSpecialty" required>
+                    <option value="">Choisir...</option>
+                    <option>Pédiatrie</option>
+                    <option>Chirurgie</option>
+                    <option>Gynéco-Obstétrique</option>
+                    <option>Médecine interne</option>
+                    <option>Santé publique</option>
+                    <option>Anesthésie-Réanimation</option>
+                    <option>Radiologie</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Hôpital *</label>
+                  <input type="text" id="regHospital" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Année internat *</label>
+                  <input type="number" id="regYear" required min="2000" max="2030">
+                </div>
+                <div class="form-group">
+                  <label>Téléphone</label>
+                  <input type="tel" id="regPhone">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Mot de passe * (min. 6 caractères)</label>
+                <input type="password" id="regPassword" required minlength="6">
+              </div>
+              <div class="form-group">
+                <label>Confirmer le mot de passe *</label>
+                <input type="password" id="regPassword2" required>
+              </div>
+              <button type="submit" class="btn btn-secondary btn-block">Créer mon compte</button>
+              <p class="text-center mt-20" style="font-size: 0.8rem;">ℹ️ Votre inscription sera validée par l'administrateur</p>
+            </form>
+          </div>
+
+          <!-- Avantages Membres -->
+          <div style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <h3 style="color: #004225;"><i class="fas fa-shield-alt"></i> Avantages Membres</h3>
+            <ul style="margin-top: 20px; list-style: none;">
+              <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #009E60;"></i> Accès au texte intégral des articles</li>
+              <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #009E60;"></i> Téléchargement des PDF scientifiques</li>
+              <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #009E60;"></i> Soumission de vos travaux</li>
+              <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #009E60;"></i> Participation à la relecture scientifique</li>
+              <li style="margin-bottom: 12px;"><i class="fas fa-check-circle" style="color: #009E60;"></i> Alertes nouveaux numéros</li>
+            </ul>
+            <div style="margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 12px;">
+              <i class="fas fa-info-circle" style="color: #DA121A;"></i>
+              <p style="font-size: 0.85rem; margin-top: 5px;">Votre inscription sera validée sous 24-48h</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section CONNECTÉ (Dashboard) -->
+      <div id="dashboardSection" style="display: none;">
+        <!-- Header Dashboard -->
+        <div class="dashboard-header">
+          <div class="user-info">
+            <div class="user-avatar">
+              <i class="fas fa-user-md"></i>
+            </div>
+            <div>
+              <h2 id="dashName" style="margin: 0;">Dr. Nom Prénom</h2>
+              <p id="dashMeta" style="margin: 5px 0 0; opacity: 0.9;">Spécialité • Hôpital</p>
+            </div>
+          </div>
+          <button id="logoutBtn" class="btn btn-accent"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="dashboard-grid">
+          <div class="dash-card">
+            <div class="dash-card-icon" style="background: #004225;"><i class="fas fa-file-alt"></i></div>
+            <span class="dash-card-number" id="dashArticles">0</span>
+            <span class="dash-card-label">Mes articles</span>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-icon" style="background: #FFD700; color: #004225;"><i class="fas fa-clock"></i></div>
+            <span class="dash-card-number" id="dashPending">0</span>
+            <span class="dash-card-label">En attente</span>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-icon" style="background: #009E60;"><i class="fas fa-check-double"></i></div>
+            <span class="dash-card-number" id="dashReviews">0</span>
+            <span class="dash-card-label">Reviews faites</span>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-icon" style="background: #DA121A;"><i class="fas fa-bookmark"></i></div>
+            <span class="dash-card-number" id="dashFavorites">0</span>
+            <span class="dash-card-label">Favoris</span>
+          </div>
+        </div>
+
+        <!-- Sections -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+          <div style="background: white; border-radius: 16px; padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid #FFD700; padding-bottom: 10px;">
+              <h3 style="color: #004225;"><i class="fas fa-file-medical"></i> Mes Articles</h3>
+              <a href="soumission.html" class="btn btn-primary btn-sm">Nouveau</a>
+            </div>
+            <div id="myArticlesList">
+              <p class="text-center" style="color: #666;">Chargement...</p>
+            </div>
+          </div>
+          
+          <div style="background: white; border-radius: 16px; padding: 20px;">
+            <div style="margin-bottom: 15px; border-bottom: 2px solid #FFD700; padding-bottom: 10px;">
+              <h3 style="color: #004225;"><i class="fas fa-tasks"></i> Reviews à effectuer</h3>
+            </div>
+            <div id="myReviewsList">
+              <p class="text-center" style="color: #666;">Aucune relecture en attente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <img src="AsInAIHB.png" alt="Logo AsInAIHB" class="footer-logo">
+        <p><strong>Localisation :</strong> Cotonou, Bénin</p>
+        <p>Lundi – Vendredi : 08:00 – 18:00</p>
+        <p>Samedi : 08:00 – 13:00</p>
+      </div>
+      <div class="footer-col">
+        <h4>AsInAIHB</h4>
+        <ul>
+          <li><a href="#">Qui sommes-nous ?</a></li>
+          <li><a href="#">Bureau</a></li>
+          <li><a href="#">Adhésion</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Revue de l'interne</h4>
+        <ul>
+          <li><a href="#">Instructions</a></li>
+          <li><a href="soumission.html">Soumission</a></li>
+          <li><a href="revue.html">Archives</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="#">Conditions</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-social">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top: 20px;">
+      <p>© 2024 AsInAIHB - Espace Membres</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/membres.js"></script>
+  <script>
+    function showAuthTab(tab) {
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const tabs = document.querySelectorAll('.auth-tab');
+      
+      tabs.forEach(t => t.classList.remove('active'));
+      if (tab === 'login') {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        tabs[0].classList.add('active');
+      } else {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        tabs[1].classList.add('active');
+      }
+    }
+  </script>
 </body>
 </html>
