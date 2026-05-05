@@ -1,209 +1,246 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soumettre un Article - AsInAIHB</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soumettre un résumé - AsInAIHB</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <i class="fas fa-hospital-symbol"></i>
-                <span>AsInAIHB</span>
-            </a>
-            <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="revue.html">Revue de l'Interne</a></li>
-                <li><a href="soumission.html" class="active">Soumission</a></li>
-                <li><a href="membres.html">Espace Membres</a></li>
-                <li id="authLink"><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Connexion</a></li>
-            </ul>
-        </div>
-    </nav>
+  <!-- Bande tricolore Bénin -->
+  <div class="bande-tricolore"></div>
 
-    <div class="container" style="padding-top: 2rem; padding-bottom: 4rem;">
-        <div class="submit-header">
-            <h1><i class="fas fa-upload"></i> Soumettre un Article</h1>
-            <p>Soumettez votre travail scientifique pour publication dans la Revue de l'Interne.</p>
-        </div>
-        
-        <div class="submit-layout">
-            <div class="submit-main">
-                <form id="submitForm" class="submit-form">
-                    <div class="form-section">
-                        <h3><i class="fas fa-info-circle"></i> Informations générales</h3>
-                        
-                        <div class="form-group">
-                            <label>Titre de l'article *</label>
-                            <input type="text" id="subTitle" required placeholder="Titre complet de l'article">
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Type d'article *</label>
-                                <select id="subType" required>
-                                    <option value="">Choisir...</option>
-                                    <option value="Article original">Article Original</option>
-                                    <option value="Revue de litterature">Revue de littérature</option>
-                                    <option value="Cas clinique">Cas clinique</option>
-                                    <option value="Meta-analyse">Méta-analyse</option>
-                                    <option value="Communication courte">Communication courte</option>
-                                    <option value="Editorial">Éditorial</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Spécialité *</label>
-                                <select id="subSpecialty" required>
-                                    <option value="">Choisir...</option>
-                                    <option value="Pediatrie">Pédiatrie</option>
-                                    <option value="Chirurgie">Chirurgie</option>
-                                    <option value="Gyneco-Obstetrique">Gynéco-Obstétrique</option>
-                                    <option value="Medecine interne">Médecine interne</option>
-                                    <option value="Sante publique">Santé publique</option>
-                                    <option value="Anesthesie">Anesthésie-Réanimation</option>
-                                    <option value="Dermatologie">Dermatologie</option>
-                                    <option value="Ophtalmologie">Ophtalmologie</option>
-                                    <option value="ORL">ORL</option>
-                                    <option value="Psychiatrie">Psychiatrie</option>
-                                    <option value="Radiologie">Radiologie</option>
-                                    <option value="Autre">Autre</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-section">
-                        <h3><i class="fas fa-users"></i> Auteurs</h3>
-                        <div id="authorsList">
-                            <div class="author-row" data-index="0">
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label>Prénom *</label>
-                                        <input type="text" class="auth-firstname" required placeholder="Prénom">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Nom *</label>
-                                        <input type="text" class="auth-lastname" required placeholder="Nom">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email *</label>
-                                        <input type="email" class="auth-email" required placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label>Affiliation *</label>
-                                        <input type="text" class="auth-affiliation" required placeholder="Ex: CNHU-HKM, Cotonou">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>ORCID (optionnel)</label>
-                                        <input type="text" class="auth-orcid" placeholder="0000-0000-0000-0000">
-                                    </div>
-                                </div>
-                                <label class="checkbox-label">
-                                    <input type="radio" name="corresponding" class="auth-corresponding" value="0" checked>
-                                    Auteur correspondant
-                                </label>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-outline btn-sm" id="addAuthorBtn">
-                            <i class="fas fa-plus"></i> Ajouter un auteur
-                        </button>
-                    </div>
-                    
-                    <div class="form-section">
-                        <h3><i class="fas fa-align-left"></i> Résumé</h3>
-                        <div class="form-group">
-                            <label>Abstract / Résumé structuré *</label>
-                            <textarea id="subAbstract" rows="8" required placeholder="Rédigez votre abstract (Objectif, Méthodes, Résultats, Conclusion)..." maxlength="3000"></textarea>
-                            <span class="char-count"><span id="abstractCount">0</span> / 3000 caractères</span>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Mots-clés * (séparés par des virgules)</label>
-                            <input type="text" id="subKeywords" required placeholder="Ex: paludisme, pédiatrie, Bénin, prévalence">
-                        </div>
-                    </div>
-                    
-                    <div class="form-section">
-                        <h3><i class="fas fa-file-pdf"></i> Fichier</h3>
-                        <div class="form-group">
-                            <label>Déposer le manuscrit (PDF) *</label>
-                            <div class="file-dropzone" id="dropzone">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <p>Glissez-déposez votre PDF ici ou <span>cliquez pour parcourir</span></p>
-                                <input type="file" id="subFile" accept=".pdf" required>
-                            </div>
-                            <p class="form-hint">Taille max : 20 Mo. Format : PDF uniquement.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="form-section">
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="subConfirm" required>
-                            Je certifie que ce travail est original, n'a pas été publié ailleurs, et que tous les auteurs ont approuvé la soumission.
-                        </label>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            <i class="fas fa-paper-plane"></i> Soumettre l'article
-                        </button>
-                        <button type="button" class="btn btn-outline" id="saveDraftBtn">
-                            <i class="fas fa-save"></i> Enregistrer le brouillon
-                        </button>
-                    </div>
-                    
-                    <div id="submitError" class="alert alert-error" style="display:none;"></div>
-                    <div id="submitSuccess" class="alert alert-success" style="display:none;"></div>
-                </form>
-            </div>
-            
-            <aside class="submit-sidebar">
-                <div class="guidelines-box">
-                    <h4><i class="fas fa-clipboard-list"></i> Instructions aux auteurs</h4>
-                    <ul>
-                        <li>Le manuscrit doit être rédigé en français ou en anglais</li>
-                        <li>Format : PDF, police Times New Roman 12, interligne 1.5</li>
-                        <li>Abstract structuré : max 300 mots</li>
-                        <li>Mots-clés : 3 à 6, inspirés de MeSH si possible</li>
-                        <li>Références : style Vancouver</li>
-                        <li>Conflits d'intérêt à déclarer</li>
-                        <li>Approbation éthique si étude humaine</li>
-                    </ul>
-                    <a href="#" class="btn btn-outline btn-sm btn-block"><i class="fas fa-download"></i> Télécharger le template</a>
-                </div>
-                
-                <div class="guidelines-box">
-                    <h4><i class="fas fa-route"></i> Processus de publication</h4>
-                    <ol class="process-list">
-                        <li><strong>Soumission</strong> → Vérification administrative</li>
-                        <li><strong>Pré-relecture</strong> → Vérification anti-plagiat</li>
-                        <li><strong>Relecture par les pairs</strong> → 2 reviewers indépendants</li>
-                        <li><strong>Décision éditoriale</strong> → Acceptation / Révision / Rejet</li>
-                        <li><strong>Publication</strong> → Mise en ligne + attribution DOI</li>
-                    </ol>
-                </div>
-            </aside>
-        </div>
+  <!-- En-tête -->
+  <header class="header-africain">
+    <div class="conteneur-entete">
+      <img src="AsInAIHB.png" alt="Logo Association" class="logo-association" />
+      <h1 class="titre-association">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>© 2026 AsInAIHB - Soumission d'articles</p>
-            </div>
-        </div>
-    </footer>
+    <nav class="menu-africain">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="revue.html">Publications</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="soumission.html" class="active">Soumettre un résumé</a></li>
+        <li><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Espace Membre</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/js/js/supabase.js"></script>
-    <script src="js/js/auth.js"></script>
-    <script src="js/js/soumission.js"></script>
+  <main>
+    <div class="container" style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+      <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: #004225;"><i class="fas fa-upload"></i> Soumettre un résumé</h1>
+        <p>Partagez vos travaux scientifiques avec la communauté médicale béninoise</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 300px; gap: 30px;">
+        <!-- Formulaire Principal -->
+        <div>
+          <form id="submitForm" onsubmit="handleSubmit(event)">
+            <div style="background: white; border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+              <h3 style="color: #004225; margin-bottom: 20px;"><i class="fas fa-info-circle"></i> Informations générales</h3>
+              
+              <div class="form-group">
+                <label>Titre de l'article *</label>
+                <input type="text" id="subTitle" required placeholder="Titre complet de l'article">
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Type d'article *</label>
+                  <select id="subType" required>
+                    <option value="">Choisir...</option>
+                    <option value="Article original">Article Original</option>
+                    <option value="Revue de litterature">Revue de littérature</option>
+                    <option value="Cas clinique">Cas clinique</option>
+                    <option value="Meta-analyse">Méta-analyse</option>
+                    <option value="Communication courte">Communication courte</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Spécialité *</label>
+                  <select id="subSpecialty" required>
+                    <option value="">Choisir...</option>
+                    <option value="Pediatrie">Pédiatrie</option>
+                    <option value="Chirurgie">Chirurgie</option>
+                    <option value="Gyneco-Obstetrique">Gynéco-Obstétrique</option>
+                    <option value="Medecine interne">Médecine interne</option>
+                    <option value="Sante publique">Santé publique</option>
+                    <option value="Anesthesie">Anesthésie-Réanimation</option>
+                    <option value="Radiologie">Radiologie</option>
+                    <option value="Autre">Autre</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div style="background: white; border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+              <h3 style="color: #004225; margin-bottom: 20px;"><i class="fas fa-users"></i> Auteurs</h3>
+              <div id="authorsList">
+                <div class="author-row" data-index="0">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>Prénom *</label>
+                      <input type="text" class="auth-firstname" required placeholder="Prénom">
+                    </div>
+                    <div class="form-group">
+                      <label>Nom *</label>
+                      <input type="text" class="auth-lastname" required placeholder="Nom">
+                    </div>
+                    <div class="form-group">
+                      <label>Email *</label>
+                      <input type="email" class="auth-email" required placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label>Affiliation *</label>
+                      <input type="text" class="auth-affiliation" required placeholder="Ex: CNHU-HKM, Cotonou">
+                    </div>
+                    <div class="form-group">
+                      <label>ORCID</label>
+                      <input type="text" class="auth-orcid" placeholder="0000-0000-0000-0000">
+                    </div>
+                  </div>
+                  <label class="checkbox-label" style="display: flex; align-items: center; gap: 8px;">
+                    <input type="radio" name="corresponding" class="auth-corresponding" value="0" checked>
+                    Auteur correspondant
+                  </label>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline" id="addAuthorBtn" style="margin-top: 15px;"><i class="fas fa-plus"></i> Ajouter un auteur</button>
+            </div>
+
+            <div style="background: white; border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+              <h3 style="color: #004225; margin-bottom: 20px;"><i class="fas fa-align-left"></i> Résumé</h3>
+              <div class="form-group">
+                <label>Abstract / Résumé structuré *</label>
+                <textarea id="subAbstract" rows="8" required placeholder="Rédigez votre abstract (Objectif, Méthodes, Résultats, Conclusion)..." maxlength="3000"></textarea>
+                <span id="abstractCount" style="font-size: 0.8rem; color: #666;">0</span> / 3000 caractères
+              </div>
+              <div class="form-group">
+                <label>Mots-clés * (séparés par des virgules)</label>
+                <input type="text" id="subKeywords" required placeholder="Ex: paludisme, pédiatrie, Bénin, prévalence">
+              </div>
+            </div>
+
+            <div style="background: white; border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+              <h3 style="color: #004225; margin-bottom: 20px;"><i class="fas fa-file-pdf"></i> Fichier</h3>
+              <div class="file-dropzone" id="dropzone">
+                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #004225;"></i>
+                <p>Glissez-déposez votre PDF ici ou <span style="color: #DA121A; cursor: pointer;">cliquez pour parcourir</span></p>
+                <input type="file" id="subFile" accept=".pdf" style="display: none;">
+              </div>
+              <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Taille max : 20 Mo. Format : PDF uniquement.</p>
+            </div>
+
+            <div style="background: white; border-radius: 20px; padding: 25px; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+              <label class="checkbox-label" style="display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="subConfirm" required>
+                Je certifie que ce travail est original, n'a pas été publié ailleurs, et que tous les auteurs ont approuvé la soumission.
+              </label>
+            </div>
+
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+              <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Soumettre l'article</button>
+              <button type="button" class="btn btn-outline" id="saveDraftBtn"><i class="fas fa-save"></i> Enregistrer le brouillon</button>
+            </div>
+            
+            <div id="submitError" style="display: none;" class="alert alert-error mt-20"></div>
+            <div id="submitSuccess" style="display: none;" class="alert alert-success mt-20"></div>
+          </form>
+        </div>
+
+        <!-- Sidebar Instructions -->
+        <aside>
+          <div style="background: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); border-left: 4px solid #DA121A;">
+            <h4 style="color: #004225;"><i class="fas fa-clipboard-list"></i> Instructions</h4>
+            <ul style="margin-top: 15px; list-style: none; padding: 0;">
+              <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: #009E60;"></i> Manuscrit en français ou anglais</li>
+              <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: #009E60;"></i> Format PDF, police 12, interligne 1.5</li>
+              <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: #009E60;"></i> Abstract structuré : 300 mots max</li>
+              <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: #009E60;"></i> Mots-clés : 3 à 6</li>
+              <li style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: #009E60;"></i> Références : style Vancouver</li>
+            </ul>
+          </div>
+          
+          <div style="background: #004225; border-radius: 16px; padding: 20px; color: white;">
+            <h4><i class="fas fa-route"></i> Processus</h4>
+            <ol style="margin-top: 15px; padding-left: 20px;">
+              <li>Soumission</li>
+              <li>Vérification anti-plagiat</li>
+              <li>Relecture par les pairs</li>
+              <li>Décision éditoriale</li>
+              <li>Publication avec DOI</li>
+            </ol>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <img src="AsInAIHB.png" alt="Logo AsInAIHB" class="footer-logo">
+        <p><strong>Localisation :</strong> Cotonou, Bénin</p>
+        <p><strong>Heures de visite :</strong></p>
+        <p>Lundi – Vendredi : 08:00 – 18:00</p>
+        <p>Samedi : 08:00 – 13:00</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>AsInAIHB</h4>
+        <ul>
+          <li><a href="#">Qui sommes-nous ?</a></li>
+          <li><a href="#">Bureau exécutif</a></li>
+          <li><a href="#">Fonctionnement</a></li>
+          <li><a href="#">Adhésion</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Revue de l'interne</h4>
+        <ul>
+          <li><a href="#">Instructions aux auteurs</a></li>
+          <li><a href="soumission.html">Soumission</a></li>
+          <li><a href="revue.html">Archives</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="#">Conditions d'utilisation</a></li>
+          <li><a href="#">Politique des données</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-social">
+      <h4>Suivez-nous</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top: 20px; font-size: 0.8rem;">
+      <p>© 2024 AsInAIHB - Soumission d'articles</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/soumission.js"></script>
 </body>
 </html>
