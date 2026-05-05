@@ -95,4 +95,28 @@ async function handleRegister(e) {
     e.preventDefault();
     const email = document.getElementById('regEmail').value;
     const password = document.getElementById('regPassword').value;
-    const firstName = document.getElementById('regFirstName
+    const firstName = document.getElementById('regFirstName').value;
+    const lastName = document.getElementById('regLastName').value;
+    
+    const { error } = await IDH.signUp(email, password, { first_name: firstName, last_name: lastName });
+    
+    if (error) {
+        showAlert('registerError', error.message);
+    } else {
+        showAlert('registerSuccess', 'Inscription réussie ! Vérifiez votre email.');
+    }
+}
+
+async function handleLogout() {
+    await IDH.signOut();
+}
+
+function showAlert(elementId, message, type = 'error') {
+    const el = document.getElementById(elementId);
+    if (el) {
+        el.textContent = message;
+        el.style.display = 'block';
+        el.className = `alert alert-${type}`;
+        setTimeout(() => { el.style.display = 'none'; }, 5000);
+    }
+}
