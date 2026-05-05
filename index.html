@@ -3,194 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AsInAIHB - Association des Internes et Anciens Internes des Hôpitaux du Bénin</title>
+  <title>AsInAIHB - Association des Internes du Bénin</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Bande tricolore Bénin -->
+  <!-- Bande tricolore -->
   <div class="bande-tricolore"></div>
 
   <!-- En-tête -->
   <header class="header-africain">
     <div class="conteneur-entete">
-      <img src="AsInAIHB.png" alt="Logo Association" class="logo-association" />
+      <img src="AsInAIHB.png" alt="Logo" class="logo-association" style="height:70px;">
       <h1 class="titre-association">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
     </div>
-
-    <!-- Menu de navigation -->
     <nav class="menu-africain">
       <ul>
         <li><a href="index.html" class="active">Accueil</a></li>
         <li><a href="revue.html">Publications</a></li>
         <li><a href="evenements.html">Événements</a></li>
-        <li><a href="soumission.html">Soumettre un résumé</a></li>
-        <li><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Espace Membre</a></li>
+        <li><a href="soumission.html">Soumettre</a></li>
+        <li><a href="membres.html" class="btn-login">Espace Membre</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
-    <!-- Section Message du Président -->
-    <section class="mot-president">
-      <h2>Mot du Président</h2>
-      <div class="carte-president">
-        <img src="photopresident.jpeg" alt="Dr. Yévèdo TOHODJEDE" class="photo-president" onerror="this.src='https://placehold.co/130x130/004225/white?text=Dr'">
-        <div class="texte-president">
-          <p>
-            Chers consœurs, chers confrères,<br /><br />
-            C’est avec un immense plaisir que je vous souhaite la bienvenue sur la plateforme officielle de l’Association des Internes et Anciens Internes des Hôpitaux du Bénin. 
-            Ce site a été conçu comme un espace d’échange, de valorisation et de diffusion de nos activités scientifiques. 
-            Vous y trouverez les publications de nos membres, les annonces de congrès et de journées scientifiques, ainsi que la possibilité de soumettre vos propres travaux. 
-            Plus qu’un simple site, cette plateforme est le reflet de notre engagement commun pour l’excellence, la collaboration et le rayonnement scientifique. 
-            Je vous invite à vous approprier cet outil, à le faire vivre, et à y contribuer activement. 
-            Ensemble, faisons de cette initiative une source d’inspiration et de progression pour toute notre communauté médicale.
-          </p>
-          <p>
-            <strong>Dr. Yévèdo TOHODJEDE</strong><br />
-            Médecin Pédiatre au CNHU-HKM de Cotonou<br />
-            <span style="color: #DA121A;">Président de l'AsInAIHB</span>
-          </p>
-        </div>
-      </div>
-    </section>
+  <!-- Hero section -->
+  <div style="background: linear-gradient(135deg, #FFD700, #FFE44D); padding: 50px 20px; text-align: center;">
+    <h1 style="color: #004225; font-size: 2rem;">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
+    <p style="max-width: 700px; margin: 20px auto;">Excellence, Collaboration et Rayonnement Scientifique</p>
+    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+      <a href="revue.html" class="btn btn-primary">Consulter la revue</a>
+      <a href="soumission.html" class="btn btn-secondary">Soumettre un résumé</a>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap;">
+      <div class="stat-card"><span class="stat-number" id="statArticles">156</span><br>Articles</div>
+      <div class="stat-card"><span class="stat-number" id="statMembers">342</span><br>Membres</div>
+      <div class="stat-card"><span class="stat-number" id="statIssues">12</span><br>Numéros</div>
+    </div>
+  </div>
 
-    <!-- Statistiques -->
-    <div class="hero-stats">
-      <div class="stat-card">
-        <span class="stat-number" id="statArticles">156</span>
-        <span class="stat-label">Articles publiés</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number" id="statMembers">342</span>
-        <span class="stat-label">Membres actifs</span>
-      </div>
-      <div class="stat-card">
-        <span class="stat-number" id="statIssues">12</span>
-        <span class="stat-label">Numéros parus</span>
+  <!-- Message du Président -->
+  <div style="max-width: 1000px; margin: 50px auto; padding: 0 20px;">
+    <div style="background: white; border-radius: 20px; padding: 30px; display: flex; flex-wrap: wrap; gap: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+      <img src="photopresident.jpeg" alt="Président" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #FFD700;">
+      <div style="flex: 1;">
+        <h2 style="color: #004225;">Mot du Président</h2>
+        <p style="font-style: italic; color: #555; border-left: 3px solid #FFD700; padding-left: 15px;">
+          "Chers consœurs, chers confrères, c'est avec un immense plaisir que je vous souhaite la bienvenue sur la plateforme officielle de l'Association..."
+        </p>
+        <p><strong>Dr. Yévèdo TOHODJEDE</strong><br>Médecin Pédiatre au CNHU-HKM<br>Président de l'AsInAIHB</p>
       </div>
     </div>
+  </div>
 
-    <!-- Section Dernières publications -->
-    <div class="section">
-      <div class="container">
-        <h2 class="section-title">Dernières publications</h2>
-        <div class="articles-grid" id="recentArticles">
-          <div class="article-card">
-            <div class="article-cover"><i class="fas fa-child"></i></div>
-            <div class="article-info">
-              <span class="article-category">Pédiatrie</span>
-              <h3>Prévalence du paludisme grave chez les enfants de moins de 5 ans au CNHU-HKM</h3>
-              <div class="article-meta">
-                <span><i class="fas fa-user-md"></i> Tohodjede YE, Agossou J</span>
-                <span><i class="fas fa-calendar"></i> 2024</span>
-              </div>
-            </div>
-          </div>
-          <div class="article-card">
-            <div class="article-cover"><i class="fas fa-heartbeat"></i></div>
-            <div class="article-info">
-              <span class="article-category">Médecine interne</span>
-              <h3>Efficacité de l'artéméther-luméfantrine vs artésunate-amodiaquine</h3>
-              <div class="article-meta">
-                <span><i class="fas fa-user-md"></i> Kpodékon M, Fagninou A</span>
-                <span><i class="fas fa-calendar"></i> 2023</span>
-              </div>
-            </div>
-          </div>
-          <div class="article-card">
-            <div class="article-cover"><i class="fas fa-bone"></i></div>
-            <div class="article-info">
-              <span class="article-category">Chirurgie</span>
-              <h3>Fractures du fémur chez l'enfant : expérience du CNHU-HKM</h3>
-              <div class="article-meta">
-                <span><i class="fas fa-user-md"></i> Avimadje P, Sossou K</span>
-                <span><i class="fas fa-calendar"></i> 2024</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="text-center mt-20">
-          <a href="revue.html" class="btn btn-primary">Voir toutes les publications <i class="fas fa-arrow-right"></i></a>
-        </div>
+  <!-- Dernières publications -->
+  <div style="background: #f5f5f5; padding: 50px 20px;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h2 style="color: #004225; text-align: center;">Dernières publications</h2>
+      <div id="recentArticles" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 30px;">
+        <div style="background: white; border-radius: 16px; padding: 20px;">Chargement...</div>
       </div>
     </div>
+  </div>
 
-    <!-- Informations de contact -->
-    <div class="infos-contact">
-      <p><i class="fas fa-envelope"></i> asinainhb.jib@gmail.com</p>
-      <p><i class="fas fa-phone"></i> +229 0140424297</p>
-      <p><i class="fas fa-map-marker-alt"></i> Cotonou, Bénin</p>
-    </div>
-  </main>
+  <!-- Contact -->
+  <div style="background: #004225; color: white; padding: 30px; text-align: center;">
+    <p><i class="fas fa-envelope"></i> asinainhb.jib@gmail.com</p>
+    <p><i class="fas fa-phone"></i> +229 0140424297</p>
+    <p><i class="fas fa-map-marker-alt"></i> Cotonou, Bénin</p>
+  </div>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-col">
-        <img src="AsInAIHB.png" alt="Logo AsInAIHB" class="footer-logo" onerror="this.src='https://placehold.co/70x70/009E60/white?text=AsIn'">
-        <p><strong>Localisation :</strong> Cotonou, Bénin</p>
-        <p><strong>Heures de visite :</strong></p>
-        <p>Lundi – Vendredi : 08:00 – 18:00</p>
-        <p>Samedi : 08:00 – 13:00</p>
+        <img src="AsInAIHB.png" alt="Logo" class="footer-logo" style="width:60px;">
+        <p><strong>Cotonou, Bénin</strong></p>
+        <p>Lun-Ven: 08:00-18:00 | Sam: 08:00-13:00</p>
       </div>
-
       <div class="footer-col">
-        <h4>AsInAIHB</h4>
-        <ul>
-          <li><a href="#">Qui sommes-nous ?</a></li>
-          <li><a href="#">Bureau exécutif</a></li>
-          <li><a href="#">Fonctionnement</a></li>
-          <li><a href="#">Adhésion</a></li>
-        </ul>
+        <h4>Liens</h4>
+        <ul><li><a href="index.html">Accueil</a></li><li><a href="revue.html">Publications</a></li></ul>
       </div>
-
       <div class="footer-col">
-        <h4>Revue de l'interne</h4>
-        <ul>
-          <li><a href="#">Instructions aux auteurs</a></li>
-          <li><a href="soumission.html">Soumission</a></li>
-          <li><a href="revue.html">Archives</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Liens utiles</h4>
-        <ul>
-          <li><a href="#">Conditions d'utilisation</a></li>
-          <li><a href="#">Politique des données</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <h4>Contact</h4>
+        <ul><li><a href="contact.html">Nous écrire</a></li></ul>
       </div>
     </div>
-
     <div class="footer-social">
-      <h4>Suivez-nous</h4>
       <div class="social-icons">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-x-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
       </div>
     </div>
-    <div class="text-center" style="margin-top: 20px; font-size: 0.8rem;">
-      <p>© 2024 AsInAIHB - Association des Internes et Anciens Internes des Hôpitaux du Bénin - Tous droits réservés</p>
-    </div>
+    <div class="text-center">© 2024 AsInAIHB - Tous droits réservés</div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase.js"></script>
-  <script src="js/auth.js"></script>
   <script src="js/home.js"></script>
   <script>
-    // Animation des statistiques
-    document.addEventListener('DOMContentLoaded', () => {
-      const animateNumber = (el, target) => {
-        let current = 0;
-        const increment = target / 50;
-        const timer = setInterval(() => {
+    // Animation des stats
+    document.addEventListener('DOMContentLoaded', function() {
+      function animateNumber(el, target) {
+        if (!el) return;
+        var current = 0;
+        var increment = target / 50;
+        var timer = setInterval(function() {
           current += increment;
           if (current >= target) {
             el.textContent = target;
@@ -199,7 +120,7 @@
             el.textContent = Math.floor(current);
           }
         }, 30);
-      };
+      }
       
       animateNumber(document.getElementById('statArticles'), 156);
       animateNumber(document.getElementById('statMembers'), 342);
