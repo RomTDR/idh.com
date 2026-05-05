@@ -1,211 +1,336 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-
-const App = () => {
-  const [stats, setStats] = useState({ articles: 156, members: 342, issues: 12 });
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const issuesList = [
-    { vol: 12, num: 3, title: "Pédiatrie", date: "Septembre 2024", icon: "fa-child" },
-    { vol: 12, num: 2, title: "Médecine interne", date: "Juin 2024", icon: "fa-heartbeat" },
-    { vol: 12, num: 1, title: "Santé publique", date: "Mars 2024", icon: "fa-chart-line" }
-  ];
-
-  const recentArticles = [
-    { title: "Prévalence du paludisme chez les enfants de moins de 5 ans dans la zone sanitaire de Allada", authors: "K. ADJOVI, M. BOKO, S. HOUNKPATIN", year: "2024", specialty: "Pédiatrie" },
-    { title: "Facteurs associés à l'hypertension artérielle chez les adultes à Cotonou", authors: "J. DOSSOU, F. GNANHOU, L. AGBODJAN", year: "2024", specialty: "Cardiologie" },
-    { title: "Prise en charge chirurgicale des hernies inguinales à l'hôpital de zone de Lokossa", authors: "R. TOHIN, P. HOUNKPONOU, C. ZINSOU", year: "2024", specialty: "Chirurgie" },
-    { title: "Évaluation de la qualité des soins en néonatologie au CNHU-HKM", authors: "A. MENSAH, F. d'ALMEIDA", year: "2024", specialty: "Pédiatrie" }
-  ];
-
-  return (
-    <div className="app">
-      {/* Navigation */}
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-        <div className="nav-container">
-          <a href="/" className="logo">
-            <i className="fas fa-hospital-symbol"></i>
-            <span>AsInAIHB</span>
-          </a>
-          <ul className="nav-menu">
-            <li><a href="/" className="active">Accueil</a></li>
-            <li><a href="/revue">Revue</a></li>
-            <li><a href="/soumission">Soumission</a></li>
-            <li><a href="/membres">Espace membres</a></li>
-            <li><a href="/login" className="btn-login"><i className="fas fa-user"></i> Connexion</a></li>
-          </ul>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <header className="hero">
-        <div className="hero-content">
-          <h1 className="animate-title">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
-          <p className="hero-subtitle">Excellence, Collaboration et Rayonnement Scientifique</p>
-          <div className="hero-actions">
-            <a href="/revue" className="btn btn-primary">
-              <i className="fas fa-book-open"></i> Explorer la revue
-            </a>
-            <a href="/soumission" className="btn btn-outline">
-              <i className="fas fa-upload"></i> Soumettre un article
-            </a>
-          </div>
-          <div className="hero-stats">
-            <div className="stat">
-              <span className="stat-num">{stats.articles}</span>
-              <span>Articles publiés</span>
-            </div>
-            <div className="stat">
-              <span className="stat-num">{stats.members}</span>
-              <span>Membres actifs</span>
-            </div>
-            <div className="stat">
-              <span className="stat-num">{stats.issues}</span>
-              <span>Numéros parus</span>
-            </div>
-          </div>
-        </div>
-        <div className="hero-bg-pattern"></div>
-      </header>
-
-      {/* Message du Président */}
-      <section className="section">
-        <div className="container">
-          <div className="msg-card">
-            <div className="msg-avatar">
-              <i className="fas fa-user-md"></i>
-            </div>
-            <div className="msg-content">
-              <h2>Mot du Président</h2>
-              <blockquote>
-                "Chers consœurs, chers confrères, c'est avec un immense plaisir que je vous souhaite la bienvenue sur la plateforme officielle de l'Association des Internes et Anciens Internes des Hôpitaux du Bénin. Ce site a été conçu comme un espace d'échange, de valorisation et de diffusion de nos activités scientifiques. Vous y trouverez les publications de nos membres, les annonces de congrès et de journées scientifiques, ainsi que la possibilité de soumettre vos propres travaux."
-              </blockquote>
-              <div className="msg-author">
-                <strong>Dr. Yévèdo TOHODJEDE</strong>
-                <span>Médecin Néphropédiatre au CNHU-HKM de Cotonou</span>
-                <span>Président de l'AsInAIHB</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Derniers numéros */}
-      <section className="section bg-light">
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title"><i className="fas fa-journal-whills"></i> Derniers numéros</h2>
-            <a href="/revue" className="view-all">Voir tous <i className="fas fa-arrow-right"></i></a>
-          </div>
-          <div className="issues-grid">
-            {issuesList.map((issue, idx) => (
-              <div className="issue-card" key={idx}>
-                <div className="issue-cover">
-                  <i className={`fas ${issue.icon}`}></i>
-                </div>
-                <div className="issue-badge">Vol. {issue.vol}, N° {issue.num}</div>
-                <h3 className="issue-title">{issue.title}</h3>
-                <p className="issue-date">{issue.date}</p>
-                <a href="#" className="issue-link">Lire le numéro <i className="fas fa-chevron-right"></i></a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Publications récentes */}
-      <section className="section">
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title"><i className="fas fa-file-medical-alt"></i> Publications récentes</h2>
-            <a href="/revue" className="view-all">Plus d'articles <i className="fas fa-arrow-right"></i></a>
-          </div>
-          <div className="articles-list">
-            {recentArticles.map((article, idx) => (
-              <div className="article-card" key={idx}>
-                <div className="article-badge">{article.specialty}</div>
-                <h3 className="article-title">{article.title}</h3>
-                <div className="article-meta">
-                  <span><i className="fas fa-user-md"></i> {article.authors}</span>
-                  <span><i className="fas fa-calendar"></i> {article.year}</span>
-                </div>
-                <div className="article-actions">
-                  <button className="article-btn">
-                    <i className="fas fa-file-pdf"></i> PDF membre
-                  </button>
-                  <button className="article-btn outline">
-                    <i className="fas fa-bookmark"></i> Sauvegarder
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Call to action */}
-      <section className="cta-section">
-        <div className="container">
-          <div className="cta-box">
-            <h2><i className="fas fa-users"></i> Rejoignez la communauté scientifique</h2>
-            <p>Créez votre compte membre pour accéder à l'intégralité des articles, soumettre vos travaux et participer à la relecture scientifique.</p>
-            <a href="/membres" className="btn btn-light btn-lg">Devenir membre</a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div className="footer-brand">
-              <h3><i className="fas fa-hospital-symbol"></i> AsInAIHB</h3>
-              <p>Association des Internes et Anciens Internes des Hôpitaux du Bénin</p>
-              <div className="social-links">
-                <a href="#"><i className="fab fa-twitter"></i></a>
-                <a href="#"><i className="fab fa-linkedin-in"></i></a>
-                <a href="#"><i className="fab fa-researchgate"></i></a>
-                <a href="#"><i className="fab fa-orcid"></i></a>
-              </div>
-            </div>
-            <div className="footer-links">
-              <h4>La revue</h4>
-              <ul>
-                <li><a href="#">Numéros courants</a></li>
-                <li><a href="#">Archives</a></li>
-                <li><a href="#">Comité éditorial</a></li>
-                <li><a href="#">Instructions aux auteurs</a></li>
-              </ul>
-            </div>
-            <div className="footer-links">
-              <h4>L'association</h4>
-              <ul>
-                <li><a href="#">Bureau exécutif</a></li>
-                <li><a href="#">Statuts</a></li>
-                <li><a href="#">Congrès et événements</a></li>
-                <li><a href="#">Bourses et appels</a></li>
-              </ul>
-            </div>
-            <div className="footer-contact">
-              <h4>Contact</h4>
-              <p><i className="fas fa-envelope"></i> contact@asinaihb.org</p>
-              <p><i className="fas fa-map-marker-alt"></i> CNHU-HKM, Cotonou, Bénin</p>
-              <p><i className="fas fa-phone"></i> +229 21 30 05 55</p>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>© 2026 AsInAIHB • Tous droits réservés • ISSN 2960-1234</p>
-          </div>
-        </div>
-      </footer>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsInAIHB - Association des Internes et Anciens Internes des Hôpitaux du Bénin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Styles supplémentaires pour les images */
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+        
+        .president-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--jaune-benin);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            text-align: center;
+            background: rgba(255,255,255,0.9);
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            min-width: 140px;
+        }
+        
+        .stat-num {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--rouge-benin);
+            display: block;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .contact-info {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .contact-item i {
+            width: 30px;
+            color: var(--rouge-benin);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar Rouge -->
+    <div class="top-bar">
+        <span><i class="fas fa-map-marker-alt"></i> Cotonou, Bénin | CNHU-HKM</span>
+        <span><i class="fas fa-envelope"></i> asinainhb.jib@gmail.com</span>
+        <span><i class="fas fa-phone"></i> +229 0140424297</span>
+        <span><i class="far fa-clock"></i> Lun-Ven: 08:00-18:00 | Sam: 08:00-13:00</span>
     </div>
-  );
-};
 
-export default App;
+    <!-- Navigation Verte -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="AsInAIHB.png" alt="Logo AsInAIHB" class="logo-image" onerror="this.src='https://placehold.co/50x50/009E60/white?text=AsIn'">
+                <div class="logo-text">
+                    <h1>AsInAIHB</h1>
+                    <p>Association des Internes et Anciens Internes des Hôpitaux du Bénin</p>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="active">Accueil</a></li>
+                    <li><a href="revue.html">Publications</a></li>
+                    <li><a href="#">Événements</a></li>
+                    <li><a href="soumission.html">Soumettre un résumé</a></li>
+                    <li><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Espace Membre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section Jaune -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
+            <p>Excellence, Collaboration et Rayonnement Scientifique - Une plateforme d'échange et de diffusion des activités scientifiques des internes du Bénin.</p>
+            <div class="hero-buttons">
+                <a href="revue.html" class="btn btn-primary"><i class="fas fa-book-open"></i> Consulter la revue</a>
+                <a href="soumission.html" class="btn btn-secondary"><i class="fas fa-upload"></i> Soumettre un résumé</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-num" id="statArticles">156</span>
+                    <span>Articles publiés</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num" id="statMembers">342</span>
+                    <span>Membres actifs</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num" id="statIssues">12</span>
+                    <span>Numéros parus</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Message du Président avec Photo -->
+    <section class="section">
+        <div class="container">
+            <div class="president-card">
+                <div class="president-avatar">
+                    <img src="photopresident.jpg" alt="Dr. Yévèdo TOHODJEDE" class="president-photo" onerror="this.src='https://placehold.co/120x120/009E60/white?text=Dr'">
+                </div>
+                <div>
+                    <h2 style="color: var(--vert-benin); margin-bottom: 1rem;">Mot du Président</h2>
+                    <p class="president-quote">
+                        "Chers consœurs, chers confrères, c'est avec un immense plaisir que je vous souhaite la bienvenue sur la plateforme officielle de l'Association des Internes et Anciens Internes des Hôpitaux du Bénin. Ce site a été conçu comme un espace d'échange, de valorisation et de diffusion de nos activités scientifiques. Vous y trouverez les publications de nos membres, les annonces de congrès et de journées scientifiques, ainsi que la possibilité de soumettre vos propres travaux. Plus qu'un simple site, cette plateforme est le reflet de notre engagement commun pour l'excellence, la collaboration et le rayonnement scientifique."
+                    </p>
+                    <div>
+                        <strong style="color: var(--rouge-benin); font-size: 1.1rem;">Dr. Yévèdo TOHODJEDE</strong><br>
+                        <span style="color: var(--text-medium);">Médecin Pédiatre au CNHU-HKM de Cotonou<br>Président de l'AsInAIHB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Informations de contact -->
+    <section class="section bg-light">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="contact-info">
+                    <h3 style="color: var(--rouge-benin); margin-bottom: 1rem;"><i class="fas fa-map-marker-alt"></i> Localisation</h3>
+                    <p><strong>Cotonou, Bénin</strong></p>
+                    <p>CNHU-HKM de Cotonou</p>
+                </div>
+                <div class="contact-info">
+                    <h3 style="color: var(--rouge-benin); margin-bottom: 1rem;"><i class="fas fa-clock"></i> Horaires de visite</h3>
+                    <p><strong>Lundi - Vendredi :</strong> 08:00 – 18:00</p>
+                    <p><strong>Samedi :</strong> 08:00 – 13:00</p>
+                    <p><strong>Dimanche :</strong> Fermé</p>
+                </div>
+                <div class="contact-info">
+                    <h3 style="color: var(--rouge-benin); margin-bottom: 1rem;"><i class="fas fa-envelope"></i> Contact direct</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>asinainhb.jib@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+229 0140424297</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>www.asinaihb.org</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Derniers numéros -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-journal-whills"></i> Derniers numéros de la revue</h2>
+            <div class="issues-grid" id="issuesGrid">
+                <div class="issue-card">
+                    <div class="issue-cover"><i class="fas fa-child"></i></div>
+                    <div class="issue-info">
+                        <h4>Vol. 12, N°3</h4>
+                        <p>Numéro spécial Pédiatrie</p>
+                        <div class="issue-meta">Septembre 2024</div>
+                    </div>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-cover"><i class="fas fa-heartbeat"></i></div>
+                    <div class="issue-info">
+                        <h4>Vol. 12, N°2</h4>
+                        <p>Médecine interne et infectiologie</p>
+                        <div class="issue-meta">Juin 2024</div>
+                    </div>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-cover"><i class="fas fa-chart-line"></i></div>
+                    <div class="issue-info">
+                        <h4>Vol. 12, N°1</h4>
+                        <p>Santé publique et épidémiologie</p>
+                        <div class="issue-meta">Mars 2024</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Liens rapides -->
+    <section class="section bg-light">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: var(--vert-benin);"><i class="fas fa-users"></i> AsInAIHB</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li><a href="#" style="color: var(--text-medium); text-decoration: none;">→ Qui sommes-nous ?</a></li>
+                        <li><a href="#" style="color: var(--text-medium); text-decoration: none;">→ Bureau exécutif</a></li>
+                        <li><a href="#" style="color: var(--text-medium); text-decoration: none;">→ Fonctionnement</a></li>
+                        <li><a href="#" style="color: var(--text-medium); text-decoration: none;">→ Adhésion</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: var(--vert-benin);"><i class="fas fa-book"></i> Revue de l'Interne</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li><a href="#" style="color: var(--text-medium); text-decoration: none;">→ Instructions aux auteurs</a></li>
+                        <li><a href="soumission.html" style="color: var(--text-medium); text-decoration: none;">→ Soumission</a></li>
+                        <li><a href="revue.html" style="color: var(--text-medium); text-decoration: none;">→ Archives</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: var(--vert-benin);"><i class="fas fa-link"></i> Liens utiles</h3>
+                    <ul style="list-style: none; margin-top: 1rem;">
+                        <li><a href="#" style="color: var(--text-medium); text-decoration: none;">→ Conditions d'utilisation</a></li>
+                        <li><a href="#" style="color: var(--text-medium); text-decoration: none;">→ Politique des données</a></li>
+                        <li><a href="#" style="color: var(--text-medium); text-decoration: none;">→ Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Rouge -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4><i class="fas fa-hospital-symbol"></i> AsInAIHB</h4>
+                <p>Association des Internes et Anciens Internes des Hôpitaux du Bénin</p>
+                <p style="margin-top: 1rem;">
+                    <i class="fas fa-map-marker-alt"></i> Cotonou, Bénin<br>
+                    <i class="fas fa-envelope"></i> asinainhb.jib@gmail.com<br>
+                    <i class="fas fa-phone"></i> +229 0140424297
+                </p>
+            </div>
+            <div>
+                <h4>Liens rapides</h4>
+                <ul>
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="revue.html">Publications</a></li>
+                    <li><a href="#">Événements</a></li>
+                    <li><a href="soumission.html">Soumettre un résumé</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Revue</h4>
+                <ul>
+                    <li><a href="#">Instructions</a></li>
+                    <li><a href="soumission.html">Soumission</a></li>
+                    <li><a href="revue.html">Archives</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Suivez-nous</h4>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" style="font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" style="font-size: 1.5rem;"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 AsInAIHB - Association des Internes et Anciens Internes des Hôpitaux du Bénin - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Mobile menu
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        if (mobileBtn && mainNav) {
+            mobileBtn.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+            });
+        }
+        
+        // Animation des stats
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateNumber = (element, target) => {
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        element.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 30);
+            };
+            
+            animateNumber(document.getElementById('statArticles'), 156);
+            animateNumber(document.getElementById('statMembers'), 342);
+            animateNumber(document.getElementById('statIssues'), 12);
+        });
+    </script>
+</body>
+</html>
