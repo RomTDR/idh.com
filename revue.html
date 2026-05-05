@@ -3,118 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publications - Revue de l'Interne - AsInAIHB</title>
+  <title>Publications - AsInAIHB</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Bande tricolore Bénin -->
+  <!-- Bande tricolore -->
   <div class="bande-tricolore"></div>
 
   <!-- En-tête -->
   <header class="header-africain">
     <div class="conteneur-entete">
-      <img src="AsInAIHB.png" alt="Logo Association" class="logo-association" />
+      <img src="AsInAIHB.png" alt="Logo" class="logo-association" style="height:70px;">
       <h1 class="titre-association">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
     </div>
-
     <nav class="menu-africain">
       <ul>
         <li><a href="index.html">Accueil</a></li>
         <li><a href="revue.html" class="active">Publications</a></li>
         <li><a href="evenements.html">Événements</a></li>
-        <li><a href="soumission.html">Soumettre un résumé</a></li>
-        <li><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Espace Membre</a></li>
+        <li><a href="soumission.html">Soumettre</a></li>
+        <li><a href="membres.html" class="btn-login">Espace Membre</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Header Recherche -->
-  <div style="background: linear-gradient(135deg, #004225, #009E60); padding: 40px 20px; text-align: center; color: white;">
-    <div class="container">
-      <h1 style="font-size: 2rem; margin-bottom: 10px;"><i class="fas fa-book-medical"></i> Revue de l'Interne</h1>
-      <p>Base de données des publications scientifiques des internes du Bénin</p>
-      
-      <div style="display: flex; max-width: 700px; margin: 30px auto 0; border-radius: 50px; overflow: hidden;">
-        <input type="text" id="searchInput" placeholder="Rechercher par titre, auteur, mot-clé..." style="flex: 1; padding: 15px 20px; border: none; font-size: 1rem;">
-        <button id="searchBtn" style="background: #FFD700; border: none; padding: 0 25px; font-weight: bold; cursor: pointer; color: #004225;"><i class="fas fa-search"></i> Rechercher</button>
-      </div>
-      <div style="margin-top: 15px; font-size: 0.8rem;">
-        <span>💡 Astuces :</span>
-        <code style="background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 20px; margin: 0 5px;">auteur:Tohodjede</code>
-        <code style="background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 20px; margin: 0 5px;">année:2024</code>
-        <code style="background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 20px; margin: 0 5px;">specialite:Pédiatrie</code>
+  <!-- Header recherche -->
+  <div style="background: #004225; padding: 40px 20px; text-align: center; color: white;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <h1><i class="fas fa-book-medical"></i> Revue de l'Interne</h1>
+      <p>Publications scientifiques des internes du Bénin</p>
+      <div style="display: flex; max-width: 600px; margin: 20px auto; border-radius: 50px; overflow: hidden;">
+        <input type="text" id="searchInput" placeholder="Rechercher..." style="flex:1; padding: 12px 20px; border: none;">
+        <button id="searchBtn" style="background: #FFD700; border: none; padding: 0 25px; cursor: pointer; font-weight: bold;">Rechercher</button>
       </div>
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="container" style="max-width: 1400px; margin: 40px auto; padding: 0 20px;">
-    <div style="display: grid; grid-template-columns: 280px 1fr; gap: 30px;">
+  <!-- Contenu principal -->
+  <div style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 30px;">
       
-      <!-- Sidebar Filtres -->
-      <aside>
-        <div style="background: white; border-radius: 16px; padding: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-          <h3 style="color: #004225; margin-bottom: 20px;"><i class="fas fa-filter"></i> Filtres</h3>
-          
-          <div class="filter-group">
-            <h4 style="color: #004225; margin-bottom: 10px;">Date de publication</h4>
-            <label class="filter-item"><input type="radio" name="filterDate" value="1year"> Dernière année</label>
-            <label class="filter-item"><input type="radio" name="filterDate" value="5years"> 5 dernières années</label>
-            <label class="filter-item"><input type="radio" name="filterDate" value="all" checked> Toutes</label>
-          </div>
-          
-          <div class="filter-group">
-            <h4 style="color: #004225; margin-bottom: 10px;">Spécialité</h4>
+      <!-- Sidebar filtres -->
+      <aside style="width: 260px;">
+        <div style="background: white; border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <h3 style="color: #004225;"><i class="fas fa-filter"></i> Filtres</h3>
+          <div style="margin: 15px 0;">
+            <h4>Spécialité</h4>
             <div id="specialtyFilters"></div>
           </div>
-          
-          <div class="filter-group">
-            <h4 style="color: #004225; margin-bottom: 10px;">Type d'article</h4>
+          <div style="margin: 15px 0;">
+            <h4>Type d'article</h4>
             <div id="typeFilters"></div>
-          </div>
-          
-          <div class="filter-group">
-            <h4 style="color: #004225; margin-bottom: 10px;">Accès</h4>
-            <label class="filter-item"><input type="checkbox" id="filterFree"> Texte complet libre</label>
-            <label class="filter-item"><input type="checkbox" id="filterMember"> PDF membre uniquement</label>
           </div>
         </div>
       </aside>
 
       <!-- Résultats -->
-      <main>
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
-          <span id="resultsCount" style="color: #666;">Chargement...</span>
-          <div style="display: flex; gap: 10px;">
-            <select id="sortSelect" style="padding: 8px 15px; border-radius: 25px; border: 1px solid #ddd;">
-              <option value="date_desc">Plus récent</option>
-              <option value="date_asc">Plus ancien</option>
-              <option value="author">Auteur (A-Z)</option>
-            </select>
-            <select id="perPage" style="padding: 8px 15px; border-radius: 25px; border: 1px solid #ddd;">
-              <option value="10">10 / page</option>
-              <option value="20">20 / page</option>
-              <option value="50">50 / page</option>
-            </select>
-          </div>
+      <main style="flex: 1;">
+        <div id="articlesList" style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="text-align: center; padding: 50px;">Chargement des articles...</div>
         </div>
-        
-        <div id="articlesList">
-          <div class="text-center" style="padding: 50px;"><i class="fas fa-spinner fa-spin"></i> Chargement des articles...</div>
-        </div>
-        
-        <div class="pagination" id="pagination"></div>
+        <div id="pagination" style="display: flex; justify-content: center; gap: 10px; margin-top: 30px;"></div>
       </main>
-    </div>
-  </div>
-
-  <!-- Modal Article -->
-  <div id="articleModal" class="modal">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
-      <div id="modalBody"></div>
     </div>
   </div>
 
@@ -122,72 +74,35 @@
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-col">
-        <img src="AsInAIHB.png" alt="Logo AsInAIHB" class="footer-logo">
-        <p><strong>Localisation :</strong> Cotonou, Bénin</p>
-        <p><strong>Heures de visite :</strong></p>
-        <p>Lundi – Vendredi : 08:00 – 18:00</p>
-        <p>Samedi : 08:00 – 13:00</p>
+        <img src="AsInAIHB.png" alt="Logo" class="footer-logo" style="width:60px;">
+        <p><strong>Cotonou, Bénin</strong></p>
+        <p>Lun-Ven: 08:00-18:00</p>
+        <p>Sam: 08:00-13:00</p>
       </div>
-
       <div class="footer-col">
         <h4>AsInAIHB</h4>
-        <ul>
-          <li><a href="#">Qui sommes-nous ?</a></li>
-          <li><a href="#">Bureau exécutif</a></li>
-          <li><a href="#">Fonctionnement</a></li>
-          <li><a href="#">Adhésion</a></li>
-        </ul>
+        <ul><li><a href="#">Qui sommes-nous ?</a></li></ul>
       </div>
-
       <div class="footer-col">
-        <h4>Revue de l'interne</h4>
-        <ul>
-          <li><a href="#">Instructions aux auteurs</a></li>
-          <li><a href="soumission.html">Soumission</a></li>
-          <li><a href="revue.html">Archives</a></li>
-        </ul>
+        <h4>Revue</h4>
+        <ul><li><a href="soumission.html">Soumettre</a></li></ul>
       </div>
-
       <div class="footer-col">
-        <h4>Liens utiles</h4>
-        <ul>
-          <li><a href="#">Conditions d'utilisation</a></li>
-          <li><a href="#">Politique des données</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <h4>Contact</h4>
+        <ul><li><a href="contact.html">Nous contacter</a></li></ul>
       </div>
     </div>
-
     <div class="footer-social">
-      <h4>Suivez-nous</h4>
       <div class="social-icons">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-x-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
       </div>
     </div>
-    <div class="text-center" style="margin-top: 20px; font-size: 0.8rem;">
-      <p>© 2024 AsInAIHB - Revue de l'Interne des Hôpitaux Béninois</p>
-    </div>
+    <div class="text-center" style="margin-top: 20px;">© 2024 AsInAIHB</div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase.js"></script>
-  <script src="js/auth.js"></script>
   <script src="js/revue.js"></script>
-  <script>
-    // Mobile menu
-    const mobileBtn = document.getElementById('mobileMenuBtn');
-    const mainNav = document.getElementById('mainNav');
-    if (mobileBtn && mainNav) {
-      mobileBtn.addEventListener('click', () => mainNav.classList.toggle('active'));
-    }
-    
-    function closeModal() {
-      document.getElementById('articleModal').classList.remove('active');
-    }
-  </script>
 </body>
 </html>
