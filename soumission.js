@@ -1,5 +1,5 @@
 // ========================================
-// Soumission d'articles — Upload PDF + Formulaire
+// Soumission d'articles - AsInAIHB
 // ========================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -7,20 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
     initDropzone();
     initAbstractCounter();
     initAddAuthor();
+    restoreDraft();
 });
 
 function initSubmissionForm() {
     const form = document.getElementById('submitForm');
     if (!form) return;
 
-    // Vérifier connexion
+    // Vérifier si l'utilisateur est connecté
     if (!currentUser) {
         form.innerHTML = `
-            <div class="alert alert-error" style="text-align:center;padding:3rem;">
-                <i class="fas fa-lock" style="font-size:2rem;display:block;margin-bottom:1rem;"></i>
-                <h3>Connexion requise</h3>
-                <p>Vous devez etre connecte pour soumettre un article.</p>
-                <a href="membres.html" class="btn btn-primary" style="margin-top:1rem;">Se connecter</a>
+            <div class="text-center" style="padding: 50px;">
+                <i class="fas fa-lock" style="font-size: 3rem; color: #DA121A;"></i>
+                <h3 style="margin: 20px 0;">Connexion requise</h3>
+                <p>Vous devez être connecté pour soumettre un article.</p>
+                <a href="membres.html" class="btn btn-primary" style="margin-top: 20px;">Se connecter</a>
             </div>
         `;
         return;
@@ -40,18 +41,19 @@ function initAddAuthor() {
 
         const row = document.createElement('div');
         row.className = 'author-row';
+        row.style.cssText = 'border-top: 1px solid #eee; margin-top: 15px; padding-top: 15px;';
         row.dataset.index = index;
         row.innerHTML = `
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;">
-                <strong>Auteur ${index + 1}</strong>
-                <button type="button" class="btn btn-sm btn-outline" onclick="this.closest('.author-row').remove()" style="color:#dc3545;border-color:#dc3545;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <strong style="color: #004225;">Auteur ${index + 1}</strong>
+                <button type="button" class="btn-remove" onclick="this.closest('.author-row').remove()" style="background: none; border: none; color: #DA121A; cursor: pointer;">
                     <i class="fas fa-trash"></i> Supprimer
                 </button>
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label>Prenom *</label>
-                    <input type="text" class="auth-firstname" required placeholder="Prenom">
+                    <label>Prénom *</label>
+                    <input type="text" class="auth-firstname" required placeholder="Prénom">
                 </div>
                 <div class="form-group">
                     <label>Nom *</label>
@@ -72,7 +74,7 @@ function initAddAuthor() {
                     <input type="text" class="auth-orcid" placeholder="0000-0000-0000-0000">
                 </div>
             </div>
-            <label class="checkbox-label">
+            <label class="checkbox-label" style="display: flex; align-items: center; gap: 8px; margin-top: 10px;">
                 <input type="radio" name="corresponding" class="auth-corresponding" value="${index}">
                 Auteur correspondant
             </label>
@@ -86,6 +88,15 @@ function initDropzone() {
     const fileInput = document.getElementById('subFile');
     if (!dropzone || !fileInput) return;
 
+    // Cacher l'input file et utiliser le dropzone
+    fileInput.style.display = 'none';
+    
+    // Gérer le clic sur le dropzone
+    dropzone.addEventListener('click', () => {
+        fileInput.click();
+    });
+    
+    // Gérer les événements drag & drop
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropzone.addEventListener(eventName, preventDefaults, false);
     });
@@ -96,11 +107,19 @@ function initDropzone() {
     }
 
     ['dragenter', 'dragover'].forEach(eventName => {
-        dropzone.addEventListener(eventName, () => dropzone.classList.add('dragover'), false);
+        dropzone.addEventListener(eventName, () => {
+            dropzone.classList.add('dragover');
+            dropzone.style.borderColor = '#DA121A';
+            dropzone.style.background = 'rgba(218, 18, 26, 0.05)';
+        }, false);
     });
 
     ['dragleave', 'drop'].forEach(eventName => {
-        dropzone.addEventListener(eventName, () => dropzone.classList.remove('dragover'), false);
+        dropzone.addEventListener(eventName, () => {
+            dropzone.classList.remove('dragover');
+            dropzone.style.borderColor = '#004225';
+            dropzone.style.background = '';
+        }, false);
     });
 
     dropzone.addEventListener('drop', (e) => {
@@ -116,18 +135,24 @@ function initDropzone() {
             updateDropzoneText(fileInput.files[0].name);
         }
     });
-
-    // Click sur le dropzone declenche l'input file
-    dropzone.addEventListener('click', (e) => {
-        if (e.target !== fileInput) fileInput.click();
-    });
 }
 
 function updateDropzoneText(filename) {
     const dropzone = document.getElementById('dropzone');
-    const p = dropzone.querySelector('p');
-    if (p) {
-        p.innerHTML = `<i class="fas fa-file-pdf" style="color:#dc3545;font-size:2rem;"></i><br><strong>${filename}</strong><br><small>Cliquez pour changer</small>`;
+    dropzone.innerHTML = `
+        <i class="fas fa-file-pdf" style="font-size: 2rem; color: #DA121A;"></i>
+        <p><strong>${filename}</strong><br><small style="color: #666;">Cliquez pour changer de fichier</small></p>
+        <input type="file" id="subFile" accept=".pdf" style="display: none;">
+    `;
+    
+    // Réattacher l'événement click
+    const newFileInput = document.getElementById('subFile');
+    if (newFileInput) {
+        newFileInput.addEventListener('change', () => {
+            if (newFileInput.files.length) {
+                updateDropzoneText(newFileInput.files[0].name);
+            }
+        });
     }
 }
 
@@ -137,7 +162,13 @@ function initAbstractCounter() {
     if (!textarea || !counter) return;
 
     textarea.addEventListener('input', () => {
-        counter.textContent = textarea.value.length;
+        const count = textarea.value.length;
+        counter.textContent = count;
+        if (count > 3000) {
+            counter.style.color = '#DA121A';
+        } else {
+            counter.style.color = '#666';
+        }
     });
 }
 
@@ -151,10 +182,9 @@ function saveDraft() {
         savedAt: new Date().toISOString()
     };
     localStorage.setItem('articleDraft', JSON.stringify(formData));
-    showAlert('submitSuccess', 'Brouillon enregistre localement !');
+    showAlert('submitSuccess', '✅ Brouillon enregistré localement !', 'success');
 }
 
-// Restaurer le brouillon au chargement
 function restoreDraft() {
     const draft = localStorage.getItem('articleDraft');
     if (!draft) return;
@@ -166,6 +196,12 @@ function restoreDraft() {
         if (document.getElementById('subSpecialty')) document.getElementById('subSpecialty').value = data.specialty || '';
         if (document.getElementById('subAbstract')) document.getElementById('subAbstract').value = data.abstract || '';
         if (document.getElementById('subKeywords')) document.getElementById('subKeywords').value = data.keywords || '';
+        
+        if (data.abstract) {
+            document.getElementById('abstractCount').textContent = data.abstract.length;
+        }
+        
+        showAlert('submitSuccess', '📝 Brouillon restauré automatiquement', 'info');
     } catch (e) {
         console.log('Erreur restauration brouillon');
     }
@@ -175,7 +211,7 @@ async function handleSubmit(e) {
     e.preventDefault();
 
     if (!currentUser) {
-        showAlert('submitError', 'Vous devez etre connecte pour soumettre.');
+        showAlert('submitError', 'Vous devez être connecté pour soumettre.', 'error');
         return;
     }
 
@@ -193,86 +229,89 @@ async function handleSubmit(e) {
             .split(',').map(k => k.trim()).filter(k => k);
         const fileInput = document.getElementById('subFile');
 
+        // Validation
+        if (!title || !type || !specialty || !abstract || !keywords.length) {
+            throw new Error('Veuillez remplir tous les champs obligatoires.');
+        }
+
         // Collecter les auteurs
         const authorRows = document.querySelectorAll('.author-row');
         const authors = [];
         let correspondingIndex = 0;
 
         authorRows.forEach((row, idx) => {
-            const firstName = row.querySelector('.auth-firstname').value;
-            const lastName = row.querySelector('.auth-lastname').value;
-            const email = row.querySelector('.auth-email').value;
-            const affiliation = row.querySelector('.auth-affiliation').value;
-            const orcid = row.querySelector('.auth-orcid').value;
-            const isCorresponding = row.querySelector('.auth-corresponding').checked;
+            const firstName = row.querySelector('.auth-firstname')?.value;
+            const lastName = row.querySelector('.auth-lastname')?.value;
+            const email = row.querySelector('.auth-email')?.value;
+            const affiliation = row.querySelector('.auth-affiliation')?.value;
+            const orcid = row.querySelector('.auth-orcid')?.value;
+            const isCorresponding = row.querySelector('.auth-corresponding')?.checked;
 
-            authors.push({ first_name: firstName, last_name: lastName, email, affiliation, orcid });
-            if (isCorresponding) correspondingIndex = idx;
+            if (firstName && lastName && email && affiliation) {
+                authors.push({ first_name: firstName, last_name: lastName, email, affiliation, orcid });
+                if (isCorresponding) correspondingIndex = idx;
+            }
         });
 
-        // Upload du PDF
-        let pdfUrl = null;
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-            if (file.size > 20 * 1024 * 1024) {
-                throw new Error('Le fichier ne doit pas depasser 20 Mo.');
-            }
-            if (file.type !== 'application/pdf') {
-                throw new Error('Seuls les fichiers PDF sont acceptes.');
-            }
-
-            const fileName = `articles/${currentUser.id}/${Date.now()}_${file.name}`;
-
-            const { data: uploadData, error: uploadError } = await supabase.storage
-                .from('articles')
-                .upload(fileName, file, { contentType: 'application/pdf' });
-
-            if (uploadError) throw uploadError;
-
-            const { data: urlData } = supabase.storage.from('articles').getPublicUrl(fileName);
-            pdfUrl = urlData.publicUrl;
+        if (authors.length === 0) {
+            throw new Error('Veuillez ajouter au moins un auteur.');
         }
 
-        // Inserer l'article
-        const { data: article, error: insertError } = await supabase
-            .from('articles')
-            .insert([{
-                title,
-                abstract,
-                keywords,
-                authors: authors,
-                specialty,
-                article_type: type,
-                status: 'submitted',
-                corresponding_author: currentUser.id,
-                pdf_url: pdfUrl,
-                is_free: false,
-                created_at: new Date().toISOString()
-            }])
-            .select()
-            .single();
+        // Upload du PDF si présent
+        let pdfUrl = null;
+        if (fileInput && fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            if (file.size > 20 * 1024 * 1024) {
+                throw new Error('Le fichier ne doit pas dépasser 20 Mo.');
+            }
+            if (file.type !== 'application/pdf') {
+                throw new Error('Seuls les fichiers PDF sont acceptés.');
+            }
 
-        if (insertError) throw insertError;
+            pdfUrl = await IDH.uploadPDF(file, currentUser.id);
+        }
+
+        // Insérer l'article
+        const articleData = {
+            title,
+            abstract,
+            keywords,
+            authors: authors,
+            specialty,
+            article_type: type,
+            status: 'submitted',
+            corresponding_author: currentUser.id,
+            pdf_url: pdfUrl,
+            is_free: false,
+            created_at: new Date().toISOString()
+        };
+
+        const { data, error } = await IDH.submitArticle(articleData);
+
+        if (error) throw error;
 
         // Supprimer le brouillon
         localStorage.removeItem('articleDraft');
 
-        showAlert('submitSuccess', 'Article soumis avec succes ! Vous recevrez une confirmation par email. Votre article sera examine sous 48h.');
-        document.getElementById('submitForm').reset();
-
-        // Reset dropzone
+        showAlert('submitSuccess', '✅ Article soumis avec succès ! Vous recevrez une confirmation par email.', 'success');
+        document.getElementById('submitForm')?.reset();
+        
+        // Réinitialiser le dropzone
         const dropzone = document.getElementById('dropzone');
-        const p = dropzone?.querySelector('p');
-        if (p) {
-            p.innerHTML = 'Glissez-deposez votre PDF ici ou <span>cliquez pour parcourir</span>';
+        if (dropzone) {
+            dropzone.innerHTML = `
+                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #004225;"></i>
+                <p>Glissez-déposez votre PDF ici ou <span style="color: #DA121A; cursor: pointer;">cliquez pour parcourir</span></p>
+                <input type="file" id="subFile" accept=".pdf" style="display: none;">
+            `;
+            initDropzone();
         }
-
-        // Reset compteur
+        
         document.getElementById('abstractCount').textContent = '0';
 
     } catch (error) {
         console.error('Erreur soumission:', error);
-        showAlert('submitError', 'Erreur : ' + error.message);
+        showAlert('submitError', 'Erreur : ' + error.message, 'error');
     } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
@@ -285,11 +324,12 @@ function showAlert(elementId, message, type = 'error') {
         el.textContent = message;
         el.style.display = 'block';
         el.className = `alert alert-${type}`;
-        setTimeout(() => { el.style.display = 'none'; }, 6000);
+        setTimeout(() => {
+            el.style.opacity = '0';
+            setTimeout(() => {
+                el.style.display = 'none';
+                el.style.opacity = '1';
+            }, 300);
+        }, 6000);
     }
 }
-
-// Restaurer brouillon au chargement si formulaire present
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('submitForm')) restoreDraft();
-});
