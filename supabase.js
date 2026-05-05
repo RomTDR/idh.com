@@ -1,12 +1,11 @@
 // ========================================
-// SUPABASE CONFIGURATION
-// Remplacez ces valeurs par les vôtres après création du projet
+// SUPABASE CONFIGURATION - AsInAIHB
+// Remplacez ces valeurs par les vôtres
 // ========================================
 
 const SUPABASE_URL = 'https://votre-projet.supabase.co';
 const SUPABASE_ANON_KEY = 'votre-cle-anon-ici';
 
-// Initialisation Supabase (chargé via CDN dans HTML)
 let supabaseClient = null;
 
 function initSupabase() {
@@ -20,10 +19,7 @@ function initSupabase() {
     }
 }
 
-// ========================================
 // AUTHENTIFICATION
-// ========================================
-
 async function signUp(email, password, userData) {
     const { data, error } = await supabaseClient.auth.signUp({
         email,
@@ -51,15 +47,7 @@ async function getUser() {
     return user;
 }
 
-async function getSession() {
-    const { data: { session } } = await supabaseClient.auth.getSession();
-    return session;
-}
-
-// ========================================
-// ARTICLES (Revue)
-// ========================================
-
+// ARTICLES
 async function getArticles(filters = {}) {
     let query = supabaseClient
         .from('articles')
@@ -70,23 +58,11 @@ async function getArticles(filters = {}) {
     if (filters.specialty) {
         query = query.eq('specialty', filters.specialty);
     }
-    if (filters.article_type) {
-        query = query.eq('article_type', filters.article_type);
-    }
     if (filters.search) {
         query = query.or(`title.ilike.%${filters.search}%,abstract.ilike.%${filters.search}%`);
     }
     
     const { data, error } = await query;
-    return { data, error };
-}
-
-async function getArticleById(id) {
-    const { data, error } = await supabaseClient
-        .from('articles')
-        .select('*')
-        .eq('id', id)
-        .single();
     return { data, error };
 }
 
@@ -97,10 +73,7 @@ async function submitArticle(articleData) {
     return { data, error };
 }
 
-// ========================================
 // MEMBRES
-// ========================================
-
 async function getMemberProfile(userId) {
     const { data, error } = await supabaseClient
         .from('members')
@@ -118,36 +91,20 @@ async function updateMemberProfile(userId, updates) {
     return { data, error };
 }
 
-// ========================================
-// UI HELPERS
-// ========================================
-
-function showAlert(containerId, message, type = 'info') {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-    container.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
-    setTimeout(() => { container.innerHTML = ''; }, 5000);
-}
-
-function formatDate(dateString) {
-    if (!dateString) return '';
-    const d = new Date(dateString);
-    return d.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
-}
-
-// Export pour utilisation dans les pages
+// Export global
 window.IDH = {
     initSupabase,
     signUp,
     signIn,
     signOut,
     getUser,
-    getSession,
     getArticles,
-    getArticleById,
     submitArticle,
     getMemberProfile,
-    updateMemberProfile,
-    showAlert,
-    formatDate
+    updateMemberProfile
 };
+
+// Initialisation automatique
+document.addEventListener('DOMContentLoaded', () => {
+    initSupabase();
+});
