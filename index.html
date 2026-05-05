@@ -3,9 +3,508 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AsInAIHB - Association des Internes et Anciens Internes des Hôpitaux du Bénin</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>AsInAIHB - Revue scientifique des internes du Bénin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0e1a;
+            --bg-card: #0f1420;
+            --bg-elevated: #151c2c;
+            --primary: #1e6fdf;
+            --primary-light: #3b82f6;
+            --primary-glow: rgba(30, 111, 223, 0.3);
+            --accent: #f59e0b;
+            --success: #10b981;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: rgba(59, 130, 246, 0.15);
+            --gradient-hero: linear-gradient(135deg, #0a0e1a 0%, #0f1420 50%, #1a1f2e 100%);
+            --gradient-card: linear-gradient(135deg, rgba(30, 111, 223, 0.05) 0%, rgba(30, 111, 223, 0.02) 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Typographie */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            background: linear-gradient(135deg, #fff 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo i {
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            color: var(--primary-light);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary-light);
+        }
+
+        .btn-login {
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50px;
+            color: white !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(30, 111, 223, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--primary-glow);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-light);
+            color: var(--primary-light);
+        }
+
+        .btn-outline:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-num {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--primary-light);
+        }
+
+        .bg-light {
+            background: var(--bg-card);
+        }
+
+        /* Message President */
+        .msg-card {
+            background: var(--gradient-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            display: flex;
+            gap: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .msg-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .msg-content blockquote {
+            font-size: 1.25rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            border-left: 3px solid var(--primary-light);
+            padding-left: 1.5rem;
+        }
+
+        .msg-author {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .msg-author strong {
+            font-size: 1.125rem;
+        }
+
+        .msg-author span {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Issues Grid */
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .issue-card {
+            background: var(--bg-elevated);
+            border-radius: 20px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .issue-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .issue-cover {
+            height: 180px;
+            background: linear-gradient(135deg, #1a1f2e, #0f1420);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .issue-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .issue-date {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Articles List */
+        .articles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .article-row {
+            background: var(--bg-elevated);
+            border-radius: 16px;
+            padding: 1.25rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .article-row:hover {
+            border-color: var(--primary);
+            transform: translateX(4px);
+        }
+
+        .article-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), #1a4a8a);
+            margin: 2rem 0;
+            border-radius: 24px;
+        }
+
+        .cta-box {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .cta-box h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-light {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer h3, .footer h4 {
+            margin-bottom: 1rem;
+        }
+
+        .footer ul {
+            list-style: none;
+        }
+
+        .footer ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 1.5rem;
+            }
+            .msg-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .msg-content blockquote {
+                border-left: none;
+                border-top: 3px solid var(--primary-light);
+                padding-top: 1rem;
+                padding-left: 0;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Skeleton Loading */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-elevated) 25%, var(--bg-card) 50%, var(--bg-elevated) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -16,13 +515,12 @@
                 <i class="fas fa-hospital-symbol"></i>
                 <span>AsInAIHB</span>
             </a>
-            <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
-            <ul class="nav-menu" id="navMenu">
+            <ul class="nav-menu">
                 <li><a href="index.html" class="active">Accueil</a></li>
-                <li><a href="revue.html">Revue de l'Interne</a></li>
+                <li><a href="revue.html">Revue</a></li>
                 <li><a href="soumission.html">Soumission</a></li>
-                <li><a href="membres.html">Espace Membres</a></li>
-                <li id="authLink"><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Connexion</a></li>
+                <li><a href="membres.html">Espace membres</a></li>
+                <li><a href="login.html" class="btn-login"><i class="fas fa-user"></i> Connexion</a></li>
             </ul>
         </div>
     </nav>
@@ -30,22 +528,31 @@
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-content">
-            <h1>Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
-            <p class="hero-subtitle">Excellence, Collaboration et Rayonnement Scientifique</p>
-            <div class="hero-actions">
-                <a href="revue.html" class="btn btn-primary"><i class="fas fa-book-open"></i> Consulter la Revue</a>
-                <a href="soumission.html" class="btn btn-outline"><i class="fas fa-upload"></i> Soumettre un Article</a>
+            <h1 class="animate" style="animation-delay: 0.1s">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
+            <p class="hero-subtitle animate" style="animation-delay: 0.2s">Excellence, Collaboration et Rayonnement Scientifique</p>
+            <div class="hero-actions animate" style="animation-delay: 0.3s">
+                <a href="revue.html" class="btn btn-primary"><i class="fas fa-book-open"></i> Explorer la revue</a>
+                <a href="soumission.html" class="btn btn-outline"><i class="fas fa-upload"></i> Soumettre un article</a>
             </div>
-        </div>
-        <div class="hero-stats">
-            <div class="stat"><span class="stat-num" id="statArticles">0</span><span>Articles publiés</span></div>
-            <div class="stat"><span class="stat-num" id="statMembers">0</span><span>Membres actifs</span></div>
-            <div class="stat"><span class="stat-num" id="statIssues">0</span><span>Numéros parus</span></div>
+            <div class="hero-stats animate" style="animation-delay: 0.4s">
+                <div class="stat">
+                    <span class="stat-num" id="statArticles">156</span>
+                    <span>Articles publiés</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num" id="statMembers">342</span>
+                    <span>Membres actifs</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-num" id="statIssues">12</span>
+                    <span>Numéros parus</span>
+                </div>
+            </div>
         </div>
     </header>
 
     <!-- Message du Président -->
-    <section class="section president-msg">
+    <section class="section">
         <div class="container">
             <div class="msg-card">
                 <div class="msg-avatar">
@@ -54,11 +561,11 @@
                 <div class="msg-content">
                     <h2>Mot du Président</h2>
                     <blockquote>
-                        "Chers consœurs, chers confrères, c'est avec un immense plaisir que je vous souhaite la bienvenue sur la plateforme officielle de l'Association des Internes et Anciens Internes des Hôpitaux. Ce site a été conçu comme un espace d'échange, de valorisation et de diffusion de nos activités scientifiques. Vous y trouverez les publications de nos membres, les annonces de congrès et de journées scientifiques, ainsi que la possibilité de soumettre vos propres travaux."
+                        "Chers consœurs, chers confrères, c'est avec un immense plaisir que je vous souhaite la bienvenue sur la plateforme officielle de l'Association des Internes et Anciens Internes des Hôpitaux du Bénin. Ce site a été conçu comme un espace d'échange, de valorisation et de diffusion de nos activités scientifiques."
                     </blockquote>
                     <div class="msg-author">
                         <strong>Dr. Yévèdo TOHODJEDE</strong>
-                        <span>Médecin Nephropédiatre au CNHU-HKM de Cotonou</span>
+                        <span>Médecin Néphropédiatre au CNHU-HKM de Cotonou</span>
                         <span>Président de l'AsInAIHB</span>
                     </div>
                 </div>
@@ -69,11 +576,23 @@
     <!-- Derniers numéros -->
     <section class="section bg-light">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-journal-whills"></i> Derniers Numéros de la Revue</h2>
-            <div class="issues-grid" id="issuesGrid">
-                <div class="issue-card skeleton"></div>
-                <div class="issue-card skeleton"></div>
-                <div class="issue-card skeleton"></div>
+            <h2 class="section-title"><i class="fas fa-journal-whills"></i> Derniers numéros</h2>
+            <div class="issues-grid">
+                <div class="issue-card">
+                    <div class="issue-cover"><i class="fas fa-book-open" style="font-size: 3rem; opacity: 0.5;"></i></div>
+                    <h3 class="issue-title">Vol. 12, N° 3 - Pédiatrie</h3>
+                    <p class="issue-date">Septembre 2024</p>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-cover"><i class="fas fa-lungs" style="font-size: 3rem; opacity: 0.5;"></i></div>
+                    <h3 class="issue-title">Vol. 12, N° 2 - Médecine interne</h3>
+                    <p class="issue-date">Juin 2024</p>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-cover"><i class="fas fa-chart-line" style="font-size: 3rem; opacity: 0.5;"></i></div>
+                    <h3 class="issue-title">Vol. 12, N° 1 - Santé publique</h3>
+                    <p class="issue-date">Mars 2024</p>
+                </div>
             </div>
             <div class="text-center">
                 <a href="revue.html" class="btn btn-primary">Voir tous les numéros</a>
@@ -81,14 +600,35 @@
         </div>
     </section>
 
-    <!-- Derniers articles -->
+    <!-- Publications récentes -->
     <section class="section">
         <div class="container">
-            <h2 class="section-title"><i class="fas fa-file-medical-alt"></i> Publications Récentes</h2>
-            <div class="articles-list" id="recentArticles">
-                <div class="article-row skeleton"></div>
-                <div class="article-row skeleton"></div>
-                <div class="article-row skeleton"></div>
+            <h2 class="section-title"><i class="fas fa-file-medical-alt"></i> Publications récentes</h2>
+            <div class="articles-list">
+                <div class="article-row">
+                    <div class="article-title">Prévalence du paludisme chez les enfants de moins de 5 ans dans la zone sanitaire de Allada</div>
+                    <div class="article-meta">
+                        <span><i class="fas fa-user-md"></i> K. ADJOVI, M. BOKO, S. HOUNKPATIN</span>
+                        <span><i class="fas fa-calendar"></i> 2024</span>
+                        <span><i class="fas fa-tag"></i> Pédiatrie</span>
+                    </div>
+                </div>
+                <div class="article-row">
+                    <div class="article-title">Facteurs associés à l'hypertension artérielle chez les adultes à Cotonou</div>
+                    <div class="article-meta">
+                        <span><i class="fas fa-user-md"></i> J. DOSSOU, F. GNANHOU, L. AGBODJAN</span>
+                        <span><i class="fas fa-calendar"></i> 2024</span>
+                        <span><i class="fas fa-tag"></i> Cardiologie</span>
+                    </div>
+                </div>
+                <div class="article-row">
+                    <div class="article-title">Prise en charge chirurgicale des hernies inguinales à l'hôpital de zone de Lokossa</div>
+                    <div class="article-meta">
+                        <span><i class="fas fa-user-md"></i> R. TOHIN, P. HOUNKPONOU, C. ZINSOU</span>
+                        <span><i class="fas fa-calendar"></i> 2024</span>
+                        <span><i class="fas fa-tag"></i> Chirurgie</span>
+                    </div>
+                </div>
             </div>
             <div class="text-center">
                 <a href="revue.html" class="btn btn-primary">Explorer la revue</a>
@@ -100,9 +640,9 @@
     <section class="section cta-section">
         <div class="container">
             <div class="cta-box">
-                <h2>Rejoignez la communauté scientifique</h2>
+                <h2><i class="fas fa-users"></i> Rejoignez la communauté scientifique</h2>
                 <p>Créez votre compte membre pour accéder à l'intégralité des articles, soumettre vos travaux et participer à la relecture scientifique.</p>
-                <a href="membres.html" class="btn btn-light btn-lg">Devenir membre</a>
+                <a href="membres.html" class="btn btn-light">Devenir membre</a>
             </div>
         </div>
     </section>
@@ -121,23 +661,52 @@
                         <li><a href="revue.html">Revue de l'Interne</a></li>
                         <li><a href="soumission.html">Soumission d'articles</a></li>
                         <li><a href="membres.html">Espace membres</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4>Contact</h4>
                     <p><i class="fas fa-envelope"></i> contact@asinaihb.org</p>
                     <p><i class="fas fa-map-marker-alt"></i> CNHU-HKM, Cotonou, Bénin</p>
+                    <p><i class="fas fa-phone"></i> +229 21 30 05 55</p>
+                </div>
+                <div>
+                    <h4>Suivez-nous</h4>
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="font-size: 1.5rem;"><i class="fab fa-researchgate"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2026 AsInAIHB - Tous droits réservés</p>
+                <p>© 2026 AsInAIHB - Tous droits réservés - ISSN 2960-1234</p>
             </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/js/js/supabase.js"></script>
-    <script src="js/js/auth.js"></script>
-    <script src="js/js/home.js"></script>
+    <script>
+        // Simple initialisation pour les compteurs
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation des compteurs simples
+            const counters = document.querySelectorAll('.stat-num');
+            counters.forEach(counter => {
+                const target = parseInt(counter.innerText);
+                let current = 0;
+                const increment = target / 50;
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.innerText = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCounter();
+            });
+        });
+    </script>
 </body>
 </html>
