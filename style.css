@@ -1,211 +1,851 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
+/* ========================================
+   AsInAIHB - DESIGN BÉNINOIS
+   Couleurs du drapeau : Vert (#009E60), Jaune (#FFD700), Rouge (#DA121A)
+   ======================================== */
 
-const App = () => {
-  const [stats, setStats] = useState({ articles: 156, members: 342, issues: 12 });
-  const [scrolled, setScrolled] = useState(false);
+:root {
+    /* Couleurs officielles du Bénin */
+    --vert-benin: #009E60;
+    --vert-fonce: #007a4a;
+    --vert-clair: #40c4a0;
+    --jaune-benin: #FFD700;
+    --jaune-fonce: #e6c200;
+    --jaune-clair: #ffe44d;
+    --rouge-benin: #DA121A;
+    --rouge-fonce: #b80f16;
+    --rouge-clair: #e84a50;
+    
+    /* Neutres */
+    --bg-warm: #FFFDF5;
+    --bg-creme: #FFF8F0;
+    --text-dark: #2C2C2C;
+    --text-medium: #555555;
+    --text-light: #888888;
+    --white: #FFFFFF;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --border: #E5E5E5;
+}
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  const issuesList = [
-    { vol: 12, num: 3, title: "Pédiatrie", date: "Septembre 2024", icon: "fa-child" },
-    { vol: 12, num: 2, title: "Médecine interne", date: "Juin 2024", icon: "fa-heartbeat" },
-    { vol: 12, num: 1, title: "Santé publique", date: "Mars 2024", icon: "fa-chart-line" }
-  ];
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg-warm);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
 
-  const recentArticles = [
-    { title: "Prévalence du paludisme chez les enfants de moins de 5 ans dans la zone sanitaire de Allada", authors: "K. ADJOVI, M. BOKO, S. HOUNKPATIN", year: "2024", specialty: "Pédiatrie" },
-    { title: "Facteurs associés à l'hypertension artérielle chez les adultes à Cotonou", authors: "J. DOSSOU, F. GNANHOU, L. AGBODJAN", year: "2024", specialty: "Cardiologie" },
-    { title: "Prise en charge chirurgicale des hernies inguinales à l'hôpital de zone de Lokossa", authors: "R. TOHIN, P. HOUNKPONOU, C. ZINSOU", year: "2024", specialty: "Chirurgie" },
-    { title: "Évaluation de la qualité des soins en néonatologie au CNHU-HKM", authors: "A. MENSAH, F. d'ALMEIDA", year: "2024", specialty: "Pédiatrie" }
-  ];
+/* ===== TOP BAR (Rouge) ===== */
+.top-bar {
+    background: var(--rouge-benin);
+    color: white;
+    padding: 0.5rem 2rem;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
 
-  return (
-    <div className="app">
-      {/* Navigation */}
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-        <div className="nav-container">
-          <a href="/" className="logo">
-            <i className="fas fa-hospital-symbol"></i>
-            <span>AsInAIHB</span>
-          </a>
-          <ul className="nav-menu">
-            <li><a href="/" className="active">Accueil</a></li>
-            <li><a href="/revue">Revue</a></li>
-            <li><a href="/soumission">Soumission</a></li>
-            <li><a href="/membres">Espace membres</a></li>
-            <li><a href="/login" className="btn-login"><i className="fas fa-user"></i> Connexion</a></li>
-          </ul>
-        </div>
-      </nav>
+.top-bar a {
+    color: var(--jaune-benin);
+    text-decoration: none;
+}
 
-      {/* Hero Section */}
-      <header className="hero">
-        <div className="hero-content">
-          <h1 className="animate-title">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
-          <p className="hero-subtitle">Excellence, Collaboration et Rayonnement Scientifique</p>
-          <div className="hero-actions">
-            <a href="/revue" className="btn btn-primary">
-              <i className="fas fa-book-open"></i> Explorer la revue
-            </a>
-            <a href="/soumission" className="btn btn-outline">
-              <i className="fas fa-upload"></i> Soumettre un article
-            </a>
-          </div>
-          <div className="hero-stats">
-            <div className="stat">
-              <span className="stat-num">{stats.articles}</span>
-              <span>Articles publiés</span>
-            </div>
-            <div className="stat">
-              <span className="stat-num">{stats.members}</span>
-              <span>Membres actifs</span>
-            </div>
-            <div className="stat">
-              <span className="stat-num">{stats.issues}</span>
-              <span>Numéros parus</span>
-            </div>
-          </div>
-        </div>
-        <div className="hero-bg-pattern"></div>
-      </header>
+.top-bar a:hover {
+    text-decoration: underline;
+}
 
-      {/* Message du Président */}
-      <section className="section">
-        <div className="container">
-          <div className="msg-card">
-            <div className="msg-avatar">
-              <i className="fas fa-user-md"></i>
-            </div>
-            <div className="msg-content">
-              <h2>Mot du Président</h2>
-              <blockquote>
-                "Chers consœurs, chers confrères, c'est avec un immense plaisir que je vous souhaite la bienvenue sur la plateforme officielle de l'Association des Internes et Anciens Internes des Hôpitaux du Bénin. Ce site a été conçu comme un espace d'échange, de valorisation et de diffusion de nos activités scientifiques. Vous y trouverez les publications de nos membres, les annonces de congrès et de journées scientifiques, ainsi que la possibilité de soumettre vos propres travaux."
-              </blockquote>
-              <div className="msg-author">
-                <strong>Dr. Yévèdo TOHODJEDE</strong>
-                <span>Médecin Néphropédiatre au CNHU-HKM de Cotonou</span>
-                <span>Président de l'AsInAIHB</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+/* ===== HEADER / NAVIGATION (Vert) ===== */
+header {
+    background: linear-gradient(135deg, var(--vert-benin) 0%, var(--vert-fonce) 100%);
+    color: white;
+    padding: 0.8rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
 
-      {/* Derniers numéros */}
-      <section className="section bg-light">
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title"><i className="fas fa-journal-whills"></i> Derniers numéros</h2>
-            <a href="/revue" className="view-all">Voir tous <i className="fas fa-arrow-right"></i></a>
-          </div>
-          <div className="issues-grid">
-            {issuesList.map((issue, idx) => (
-              <div className="issue-card" key={idx}>
-                <div className="issue-cover">
-                  <i className={`fas ${issue.icon}`}></i>
-                </div>
-                <div className="issue-badge">Vol. {issue.vol}, N° {issue.num}</div>
-                <h3 className="issue-title">{issue.title}</h3>
-                <p className="issue-date">{issue.date}</p>
-                <a href="#" className="issue-link">Lire le numéro <i className="fas fa-chevron-right"></i></a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
 
-      {/* Publications récentes */}
-      <section className="section">
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title"><i className="fas fa-file-medical-alt"></i> Publications récentes</h2>
-            <a href="/revue" className="view-all">Plus d'articles <i className="fas fa-arrow-right"></i></a>
-          </div>
-          <div className="articles-list">
-            {recentArticles.map((article, idx) => (
-              <div className="article-card" key={idx}>
-                <div className="article-badge">{article.specialty}</div>
-                <h3 className="article-title">{article.title}</h3>
-                <div className="article-meta">
-                  <span><i className="fas fa-user-md"></i> {article.authors}</span>
-                  <span><i className="fas fa-calendar"></i> {article.year}</span>
-                </div>
-                <div className="article-actions">
-                  <button className="article-btn">
-                    <i className="fas fa-file-pdf"></i> PDF membre
-                  </button>
-                  <button className="article-btn outline">
-                    <i className="fas fa-bookmark"></i> Sauvegarder
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
 
-      {/* Call to action */}
-      <section className="cta-section">
-        <div className="container">
-          <div className="cta-box">
-            <h2><i className="fas fa-users"></i> Rejoignez la communauté scientifique</h2>
-            <p>Créez votre compte membre pour accéder à l'intégralité des articles, soumettre vos travaux et participer à la relecture scientifique.</p>
-            <a href="/membres" className="btn btn-light btn-lg">Devenir membre</a>
-          </div>
-        </div>
-      </section>
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    background: var(--jaune-benin);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--vert-benin);
+    font-size: 1.5rem;
+}
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="container">
-          <div className="footer-grid">
-            <div className="footer-brand">
-              <h3><i className="fas fa-hospital-symbol"></i> AsInAIHB</h3>
-              <p>Association des Internes et Anciens Internes des Hôpitaux du Bénin</p>
-              <div className="social-links">
-                <a href="#"><i className="fab fa-twitter"></i></a>
-                <a href="#"><i className="fab fa-linkedin-in"></i></a>
-                <a href="#"><i className="fab fa-researchgate"></i></a>
-                <a href="#"><i className="fab fa-orcid"></i></a>
-              </div>
-            </div>
-            <div className="footer-links">
-              <h4>La revue</h4>
-              <ul>
-                <li><a href="#">Numéros courants</a></li>
-                <li><a href="#">Archives</a></li>
-                <li><a href="#">Comité éditorial</a></li>
-                <li><a href="#">Instructions aux auteurs</a></li>
-              </ul>
-            </div>
-            <div className="footer-links">
-              <h4>L'association</h4>
-              <ul>
-                <li><a href="#">Bureau exécutif</a></li>
-                <li><a href="#">Statuts</a></li>
-                <li><a href="#">Congrès et événements</a></li>
-                <li><a href="#">Bourses et appels</a></li>
-              </ul>
-            </div>
-            <div className="footer-contact">
-              <h4>Contact</h4>
-              <p><i className="fas fa-envelope"></i> contact@asinaihb.org</p>
-              <p><i className="fas fa-map-marker-alt"></i> CNHU-HKM, Cotonou, Bénin</p>
-              <p><i className="fas fa-phone"></i> +229 21 30 05 55</p>
-            </div>
-          </div>
-          <div className="footer-bottom">
-            <p>© 2026 AsInAIHB • Tous droits réservés • ISSN 2960-1234</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-};
+.logo-text h1 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+}
 
-export default App;
+.logo-text p {
+    font-size: 0.7rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+nav a:hover, nav a.active {
+    border-bottom-color: var(--jaune-benin);
+    color: var(--jaune-benin);
+}
+
+.btn-login {
+    background: var(--jaune-benin) !important;
+    color: var(--vert-benin) !important;
+    padding: 0.5rem 1.25rem !important;
+    border-radius: 50px !important;
+    border-bottom: none !important;
+}
+
+.btn-login:hover {
+    background: var(--jaune-clair) !important;
+    color: var(--vert-fonce) !important;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* ===== HERO SECTION (Jaune) ===== */
+.hero {
+    background: linear-gradient(135deg, var(--jaune-benin) 0%, var(--jaune-clair) 100%);
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(circle at 20% 30%, rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 2.2rem;
+    color: var(--vert-benin);
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+/* ===== BOUTONS ===== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: var(--rouge-benin);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--rouge-fonce);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(218, 18, 26, 0.3);
+}
+
+.btn-secondary {
+    background: var(--vert-benin);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: var(--vert-fonce);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--vert-benin);
+    border: 2px solid var(--vert-benin);
+}
+
+.btn-outline:hover {
+    background: var(--vert-benin);
+    color: white;
+}
+
+.btn-accent {
+    background: var(--jaune-benin);
+    color: var(--rouge-benin);
+}
+
+.btn-accent:hover {
+    background: var(--jaune-fonce);
+    transform: translateY(-2px);
+}
+
+.btn-sm {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+    padding: 4rem 2rem;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--vert-benin);
+}
+
+.section-title i {
+    color: var(--rouge-benin);
+}
+
+.bg-light {
+    background: var(--bg-creme);
+}
+
+/* ===== MESSAGE DU PRÉSIDENT ===== */
+.president-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    background: var(--white);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border-left: 6px solid var(--rouge-benin);
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.president-avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--vert-benin), var(--rouge-benin));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 158, 96, 0.3);
+}
+
+.president-quote {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-medium);
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    border-left: 3px solid var(--jaune-benin);
+    padding-left: 1.5rem;
+}
+
+/* ===== CARTES DES NUMÉROS ===== */
+.issues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.issue-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 1px solid rgba(0, 158, 96, 0.1);
+}
+
+.issue-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--jaune-benin);
+}
+
+.issue-cover {
+    height: 160px;
+    background: linear-gradient(135deg, var(--vert-benin), var(--vert-clair));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--jaune-benin);
+}
+
+.issue-info {
+    padding: 1.5rem;
+}
+
+.issue-info h4 {
+    color: var(--rouge-benin);
+    margin-bottom: 0.5rem;
+}
+
+.issue-info p {
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.issue-meta {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* ===== ARTICLES ===== */
+.article-row {
+    background: var(--white);
+    padding: 1.2rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: all 0.3s;
+    border-left: 4px solid var(--jaune-benin);
+}
+
+.article-row:hover {
+    transform: translateX(5px);
+    border-left-color: var(--rouge-benin);
+    box-shadow: var(--shadow-lg);
+}
+
+.article-row h4 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--vert-benin);
+}
+
+.article-row-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    flex-wrap: wrap;
+}
+
+/* ===== FORMULAIRES ===== */
+.form-container {
+    max-width: 550px;
+    margin: 3rem auto;
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    border-top: 5px solid var(--rouge-benin);
+}
+
+.form-container h2 {
+    text-align: center;
+    color: var(--vert-benin);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.3s;
+    background: var(--bg-warm);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--vert-benin);
+    box-shadow: 0 0 0 3px rgba(0, 158, 96, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1.5rem;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.auth-tab {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    background: var(--bg-warm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.auth-tab.active {
+    background: var(--vert-benin);
+    color: white;
+}
+
+/* ===== DASHBOARD ===== */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, var(--vert-benin), var(--vert-fonce));
+    border-radius: 20px;
+    color: white;
+}
+
+.user-avatar {
+    width: 70px;
+    height: 70px;
+    background: var(--jaune-benin);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--vert-benin);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dash-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+    border-bottom: 3px solid var(--jaune-benin);
+}
+
+.dash-card:hover {
+    transform: translateY(-3px);
+}
+
+.dash-card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.dash-card-icon.blue { background: var(--vert-benin); }
+.dash-card-icon.orange { background: var(--jaune-fonce); color: var(--text-dark); }
+.dash-card-icon.green { background: var(--vert-clair); }
+.dash-card-icon.purple { background: var(--rouge-benin); }
+
+.dash-card-num {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    display: block;
+}
+
+.dash-card-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+/* ===== MODAL ===== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--white);
+    border-radius: 20px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+/* ===== PAGINATION ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.page-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    background: var(--white);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.page-btn.active {
+    background: var(--vert-benin);
+    color: white;
+    border-color: var(--vert-benin);
+}
+
+.page-btn:hover:not(.active) {
+    background: var(--jaune-benin);
+    border-color: var(--jaune-benin);
+}
+
+/* ===== FOOTER (Rouge) ===== */
+footer {
+    background: var(--rouge-benin);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 3rem 2rem 1.5rem;
+    margin-top: 3rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer h4 {
+    margin-bottom: 1rem;
+    color: var(--jaune-benin);
+}
+
+.footer ul {
+    list-style: none;
+}
+
+.footer li {
+    margin-bottom: 0.5rem;
+}
+
+.footer a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--jaune-benin);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ===== ALERTES ===== */
+.alert {
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+
+.alert-success {
+    background: rgba(0, 158, 96, 0.1);
+    border: 1px solid var(--vert-benin);
+    color: var(--vert-benin);
+}
+
+.alert-error {
+    background: rgba(218, 18, 26, 0.1);
+    border: 1px solid var(--rouge-benin);
+    color: var(--rouge-benin);
+}
+
+.alert-info {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid var(--jaune-benin);
+    color: var(--jaune-fonce);
+}
+
+/* ===== LOADING ===== */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--vert-benin);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    nav {
+        display: none;
+        width: 100%;
+        margin-top: 1rem;
+    }
+    
+    nav.active {
+        display: block;
+    }
+    
+    nav ul {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+    
+    .president-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .president-quote {
+        border-left: none;
+        border-top: 3px solid var(--jaune-benin);
+        padding-top: 1rem;
+        padding-left: 0;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* ===== UTILITAIRES ===== */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-member {
+    background: var(--vert-benin);
+    color: white;
+}
+
+.badge-reviewer {
+    background: var(--jaune-benin);
+    color: var(--vert-benin);
+}
+
+.badge-editor {
+    background: var(--rouge-benin);
+    color: white;
+}
+
+/* ===== DROPZONE ===== */
+.file-dropzone {
+    border: 2px dashed var(--vert-benin);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: var(--bg-creme);
+}
+
+.file-dropzone.dragover {
+    background: rgba(0, 158, 96, 0.05);
+    border-color: var(--rouge-benin);
+}
+
+.file-dropzone i {
+    font-size: 2.5rem;
+    color: var(--vert-benin);
+    margin-bottom: 0.5rem;
+}
+
+/* ===== TAGS ===== */
+.tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.tag-type {
+    background: var(--jaune-benin);
+    color: var(--vert-benin);
+}
+
+.tag-free {
+    background: var(--vert-benin);
+    color: white;
+}
+
+.tag-member {
+    background: var(--rouge-benin);
+    color: white;
+}
+
+.tag-keyword {
+    background: var(--bg-creme);
+    border: 1px solid var(--border);
+    color: var(--text-medium);
+}
