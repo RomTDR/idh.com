@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - AsInAIHB</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Bande tricolore Bénin -->
+  <div class="bande-tricolore"></div>
+
+  <!-- En-tête -->
+  <header class="header-africain">
+    <div class="conteneur-entete">
+      <img src="AsInAIHB.png" alt="Logo Association" class="logo-association" />
+      <h1 class="titre-association">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
+    </div>
+
+    <nav class="menu-africain">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="revue.html">Publications</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="soumission.html">Soumettre un résumé</a></li>
+        <li><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Espace Membre</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Section Contact -->
+    <section class="mot-president">
+      <h2>Nous contacter</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 30px;">
+        
+        <!-- Informations -->
+        <div class="carte-president" style="flex-direction: column;">
+          <h3 style="color: #004225; margin-bottom: 20px;"><i class="fas fa-info-circle"></i> Nos coordonnées</h3>
+          <div class="contact-item" style="display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee;">
+            <i class="fas fa-map-marker-alt" style="font-size: 1.5rem; color: #DA121A; width: 40px;"></i>
+            <div>
+              <strong>Adresse</strong><br>
+              CNHU-HKM, Cotonou, Bénin
+            </div>
+          </div>
+          <div class="contact-item" style="display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee;">
+            <i class="fas fa-envelope" style="font-size: 1.5rem; color: #DA121A; width: 40px;"></i>
+            <div>
+              <strong>Email</strong><br>
+              asinainhb.jib@gmail.com
+            </div>
+          </div>
+          <div class="contact-item" style="display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #eee;">
+            <i class="fas fa-phone" style="font-size: 1.5rem; color: #DA121A; width: 40px;"></i>
+            <div>
+              <strong>Téléphone</strong><br>
+              +229 0140424297
+            </div>
+          </div>
+          <div class="contact-item" style="display: flex; align-items: center; gap: 15px; padding: 12px 0;">
+            <i class="fas fa-clock" style="font-size: 1.5rem; color: #DA121A; width: 40px;"></i>
+            <div>
+              <strong>Horaires</strong><br>
+              Lundi - Vendredi : 08:00 - 18:00<br>
+              Samedi : 08:00 - 13:00
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulaire de contact -->
+        <div class="carte-president" style="flex-direction: column;">
+          <h3 style="color: #004225; margin-bottom: 20px;"><i class="fas fa-paper-plane"></i> Envoyez-nous un message</h3>
+          <form id="contactForm" onsubmit="sendMessage(event)">
+            <div class="form-group">
+              <label>Nom complet *</label>
+              <input type="text" id="contactName" required placeholder="Votre nom">
+            </div>
+            <div class="form-group">
+              <label>Email *</label>
+              <input type="email" id="contactEmail" required placeholder="votre@email.com">
+            </div>
+            <div class="form-group">
+              <label>Sujet *</label>
+              <input type="text" id="contactSubject" required placeholder="Sujet de votre message">
+            </div>
+            <div class="form-group">
+              <label>Message *</label>
+              <textarea id="contactMessage" rows="5" required placeholder="Votre message..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <i class="fas fa-paper-plane"></i> Envoyer le message
+            </button>
+            <div id="contactAlert" style="margin-top: 15px;"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Bureau -->
+    <section class="section" style="background: linear-gradient(135deg, #f5f5f5, #fff);">
+      <div class="container">
+        <h2 class="section-title">Bureau exécutif</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+          <div class="article-card" style="text-align: center;">
+            <i class="fas fa-user-md" style="font-size: 2.5rem; color: #004225;"></i>
+            <h3 style="color: #DA121A;">Dr. Yévèdo TOHODJEDE</h3>
+            <p>Président</p>
+            <p style="font-size: 0.8rem; color: #666;">Médecin Pédiatre, CNHU-HKM</p>
+          </div>
+          <div class="article-card" style="text-align: center;">
+            <i class="fas fa-user-md" style="font-size: 2.5rem; color: #004225;"></i>
+            <h3 style="color: #DA121A;">Dr. Koffi MENSAH</h3>
+            <p>Vice-président</p>
+            <p style="font-size: 0.8rem; color: #666;">Chirurgien, HZ de Lokossa</p>
+          </div>
+          <div class="article-card" style="text-align: center;">
+            <i class="fas fa-user-md" style="font-size: 2.5rem; color: #004225;"></i>
+            <h3 style="color: #DA121A;">Dr. Amélie DOSSOU</h3>
+            <p>Secrétaire générale</p>
+            <p style="font-size: 0.8rem; color: #666;">Médecin interne, CNHU-HKM</p>
+          </div>
+          <div class="article-card" style="text-align: center;">
+            <i class="fas fa-user-md" style="font-size: 2.5rem; color: #004225;"></i>
+            <h3 style="color: #DA121A;">Dr. Jean ADJOVI</h3>
+            <p>Trésorier</p>
+            <p style="font-size: 0.8rem; color: #666;">Médecin interne, HZ d'Allada</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Carte Google Maps -->
+    <section class="mot-president">
+      <h2>Nous trouver</h2>
+      <div class="carte-president" style="padding: 0; overflow: hidden;">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.833333333333!2d2.433333!3d6.366667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1020a1b8c8c8c8c8%3A0x123456789abcdef!2sCNHU-HKM%20Cotonou!5e0!3m2!1sfr!2sbj!4v1234567890123!5m2!1sfr!2sbj" 
+          width="100%" 
+          height="400" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- Informations de contact -->
+    <div class="infos-contact">
+      <p><i class="fas fa-envelope"></i> asinainhb.jib@gmail.com</p>
+      <p><i class="fas fa-phone"></i> +229 0140424297</p>
+      <p><i class="fas fa-map-marker-alt"></i> Cotonou, Bénin</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <img src="AsInAIHB.png" alt="Logo AsInAIHB" class="footer-logo" onerror="this.src='https://placehold.co/70x70/009E60/white?text=AsIn'">
+        <p><strong>Localisation :</strong> Cotonou, Bénin</p>
+        <p><strong>Heures de visite :</strong></p>
+        <p>Lundi – Vendredi : 08:00 – 18:00</p>
+        <p>Samedi : 08:00 – 13:00</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>AsInAIHB</h4>
+        <ul>
+          <li><a href="#">Qui sommes-nous ?</a></li>
+          <li><a href="#">Bureau exécutif</a></li>
+          <li><a href="#">Fonctionnement</a></li>
+          <li><a href="#">Adhésion</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Revue de l'interne</h4>
+        <ul>
+          <li><a href="#">Instructions aux auteurs</a></li>
+          <li><a href="soumission.html">Soumission</a></li>
+          <li><a href="revue.html">Archives</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liens utiles</h4>
+        <ul>
+          <li><a href="#">Conditions d'utilisation</a></li>
+          <li><a href="#">Politique des données</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-social">
+      <h4>Suivez-nous</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top: 20px; font-size: 0.8rem;">
+      <p>© 2024 AsInAIHB - Association des Internes et Anciens Internes des Hôpitaux du Bénin - Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script>
+    function sendMessage(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value;
+      const email = document.getElementById('contactEmail').value;
+      const subject = document.getElementById('contactSubject').value;
+      const message = document.getElementById('contactMessage').value;
+      
+      // Simulation d'envoi (à connecter avec un service email)
+      const alertDiv = document.getElementById('contactAlert');
+      alertDiv.innerHTML = '<div class="alert alert-success">✅ Votre message a été envoyé ! Nous vous répondrons dans les plus brefs délais.</div>';
+      
+      // Réinitialiser le formulaire
+      document.getElementById('contactForm').reset();
+      
+      // Effacer l'alerte après 5 secondes
+      setTimeout(() => {
+        alertDiv.innerHTML = '';
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
