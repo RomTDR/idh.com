@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsInAIHB - Association des Internes et Anciens Internes des Hôpitaux du Bénin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-hospital-symbol"></i>
+                <span>AsInAIHB</span>
+            </a>
+            <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="revue.html">Revue de l'Interne</a></li>
+                <li><a href="soumission.html">Soumission</a></li>
+                <li><a href="membres.html">Espace Membres</a></li>
+                <li id="authLink"><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Connexion</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
+            <p class="hero-subtitle">Excellence, Collaboration et Rayonnement Scientifique</p>
+            <div class="hero-actions">
+                <a href="revue.html" class="btn btn-primary"><i class="fas fa-book-open"></i> Consulter la Revue</a>
+                <a href="soumission.html" class="btn btn-outline"><i class="fas fa-upload"></i> Soumettre un Article</a>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat"><span class="stat-num" id="statArticles">0</span><span>Articles publiés</span></div>
+            <div class="stat"><span class="stat-num" id="statMembers">0</span><span>Membres actifs</span></div>
+            <div class="stat"><span class="stat-num" id="statIssues">0</span><span>Numéros parus</span></div>
+        </div>
+    </header>
+
+    <!-- Message du Président -->
+    <section class="section president-msg">
+        <div class="container">
+            <div class="msg-card">
+                <div class="msg-avatar">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div class="msg-content">
+                    <h2>Mot du Président</h2>
+                    <blockquote>
+                        "Chers consœurs, chers confrères, c'est avec un immense plaisir que je vous souhaite la bienvenue sur la plateforme officielle de l'Association des Internes et Anciens Internes des Hôpitaux. Ce site a été conçu comme un espace d'échange, de valorisation et de diffusion de nos activités scientifiques. Vous y trouverez les publications de nos membres, les annonces de congrès et de journées scientifiques, ainsi que la possibilité de soumettre vos propres travaux."
+                    </blockquote>
+                    <div class="msg-author">
+                        <strong>Dr. Yévèdo TOHODJEDE</strong>
+                        <span>Médecin Nephropédiatre au CNHU-HKM de Cotonou</span>
+                        <span>Président de l'AsInAIHB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Derniers numéros -->
+    <section class="section bg-light">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-journal-whills"></i> Derniers Numéros de la Revue</h2>
+            <div class="issues-grid" id="issuesGrid">
+                <div class="issue-card skeleton"></div>
+                <div class="issue-card skeleton"></div>
+                <div class="issue-card skeleton"></div>
+            </div>
+            <div class="text-center">
+                <a href="revue.html" class="btn btn-primary">Voir tous les numéros</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Derniers articles -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title"><i class="fas fa-file-medical-alt"></i> Publications Récentes</h2>
+            <div class="articles-list" id="recentArticles">
+                <div class="article-row skeleton"></div>
+                <div class="article-row skeleton"></div>
+                <div class="article-row skeleton"></div>
+            </div>
+            <div class="text-center">
+                <a href="revue.html" class="btn btn-primary">Explorer la revue</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to action -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Rejoignez la communauté scientifique</h2>
+                <p>Créez votre compte membre pour accéder à l'intégralité des articles, soumettre vos travaux et participer à la relecture scientifique.</p>
+                <a href="membres.html" class="btn btn-light btn-lg">Devenir membre</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3><i class="fas fa-hospital-symbol"></i> AsInAIHB</h3>
+                    <p>Association des Internes et Anciens Internes des Hôpitaux du Bénin</p>
+                </div>
+                <div>
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="revue.html">Revue de l'Interne</a></li>
+                        <li><a href="soumission.html">Soumission d'articles</a></li>
+                        <li><a href="membres.html">Espace membres</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> contact@asinaihb.org</p>
+                    <p><i class="fas fa-map-marker-alt"></i> CNHU-HKM, Cotonou, Bénin</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 AsInAIHB - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/js/js/supabase.js"></script>
+    <script src="js/js/auth.js"></script>
+    <script src="js/js/home.js"></script>
+</body>
+</html>

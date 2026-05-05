@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - AsInAIHB</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="top-bar">
+        <span>📍 Bénin - Cotonou | CNHU-HKM</span>
+        <span><a href="index.html">← Retour à l'accueil</a></span>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">🏥 AsIn<span>AIHB</span></div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="revue.html">Revue</a></li>
+                    <li><a href="login.html" class="active">Connexion</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="form-container">
+        <h2>🔐 Espace Membre</h2>
+        <div id="alert-container"></div>
+        
+        <!-- Onglets -->
+        <div style="display: flex; margin-bottom: 1.5rem; border-bottom: 2px solid var(--border);">
+            <button id="tab-login" class="btn" style="flex:1; border-radius:0; background:var(--primary); color:white;" onclick="showTab('login')">Connexion</button>
+            <button id="tab-register" class="btn" style="flex:1; border-radius:0; background:transparent; color:var(--text);" onclick="showTab('register')">Inscription</button>
+        </div>
+
+        <!-- Formulaire Connexion -->
+        <form id="login-form" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="login-email" required placeholder="votre@email.com">
+            </div>
+            <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" id="login-password" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">Se connecter</button>
+        </form>
+
+        <!-- Formulaire Inscription -->
+        <form id="register-form" class="hidden" onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label>Prénom</label>
+                <input type="text" id="reg-firstname" required placeholder="Jean">
+            </div>
+            <div class="form-group">
+                <label>Nom</label>
+                <input type="text" id="reg-lastname" required placeholder="DUPONT">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="reg-email" required placeholder="jean.dupont@email.com">
+            </div>
+            <div class="form-group">
+                <label>Spécialité</label>
+                <select id="reg-specialty" required>
+                    <option value="">Choisir...</option>
+                    <option>Pédiatrie</option>
+                    <option>Chirurgie</option>
+                    <option>Gynéco-Obstétrique</option>
+                    <option>Médecine interne</option>
+                    <option>Santé publique</option>
+                    <option>Anesthésie-Réanimation</option>
+                    <option>Autre</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Hôpital d'affectation</label>
+                <input type="text" id="reg-hospital" placeholder="CNHU-HKM">
+            </div>
+            <div class="form-group">
+                <label>Année d'internat</label>
+                <input type="number" id="reg-year" placeholder="2024" min="2000" max="2030">
+            </div>
+            <div class="form-group">
+                <label>Mot de passe</label>
+                <input type="password" id="reg-password" required placeholder="Minimum 6 caractères" minlength="6">
+            </div>
+            <div class="form-group">
+                <label>Confirmer le mot de passe</label>
+                <input type="password" id="reg-password2" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn btn-accent" style="width:100%;">Créer mon compte</button>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 0.8rem;">
+                ℹ️ Votre inscription sera validée par l'administrateur avant activation complète.
+            </p>
+        </form>
+
+        <div class="form-footer">
+            <a href="index.html">← Retour à l'accueil</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 AsInAIHB</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="js/js/supabase.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            IDH.initSupabase();
+            checkAlreadyLogged();
+        });
+
+        async function checkAlreadyLogged() {
+            const user = await IDH.getUser();
+            if (user) {
+                window.location.href = 'membres.html';
+            }
+        }
+
+        function showTab(tab) {
+            document.getElementById('login-form').classList.toggle('hidden', tab !== 'login');
+            document.getElementById('register-form').classList.toggle('hidden', tab !== 'register');
+            document.getElementById('tab-login').style.background = tab === 'login' ? 'var(--primary)' : 'transparent';
+            document.getElementById('tab-login').style.color = tab === 'login' ? 'white' : 'var(--text)';
+            document.getElementById('tab-register').style.background = tab === 'register' ? 'var(--accent)' : 'transparent';
+            document.getElementById('tab-register').style.color = tab === 'register' ? 'var(--primary)' : 'var(--text)';
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.innerHTML = '<span class="loading"></span> Connexion...';
+            btn.disabled = true;
+            
+            const { data, error } = await IDH.signIn(email, password);
+            
+            btn.innerHTML = 'Se connecter';
+            btn.disabled = false;
+            
+            if (error) {
+                IDH.showAlert('alert-container', 'Erreur : ' + error.message, 'error');
+            } else {
+                IDH.showAlert('alert-container', '✅ Connexion réussie ! Redirection...', 'success');
+                setTimeout(() => window.location.href = 'membres.html', 1000);
+            }
+        }
+
+        async function handleRegister(e) {
+            e.preventDefault();
+            const pwd1 = document.getElementById('reg-password').value;
+            const pwd2 = document.getElementById('reg-password2').value;
+            
+            if (pwd1 !== pwd2) {
+                IDH.showAlert('alert-container', 'Les mots de passe ne correspondent pas.', 'error');
+                return;
+            }
+            
+            const userData = {
+                first_name: document.getElementById('reg-firstname').value,
+                last_name: document.getElementById('reg-lastname').value,
+                specialty: document.getElementById('reg-specialty').value,
+                hospital: document.getElementById('reg-hospital').value,
+                promotion_year: parseInt(document.getElementById('reg-year').value) || null
+            };
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            btn.innerHTML = '<span class="loading"></span> Création...';
+            btn.disabled = true;
+            
+            const { data, error } = await IDH.signUp(
+                document.getElementById('reg-email').value,
+                pwd1,
+                userData
+            );
+            
+            btn.innerHTML = 'Créer mon compte';
+            btn.disabled = false;
+            
+            if (error) {
+                IDH.showAlert('alert-container', 'Erreur : ' + error.message, 'error');
+            } else {
+                IDH.showAlert('alert-container', '✅ Compte créé ! Vérifiez votre email pour confirmer.', 'success');
+                e.target.reset();
+            }
+        }
+    </script>
+</body>
+</html>

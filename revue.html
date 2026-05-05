@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revue de l'Interne - AsInAIHB</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="revue-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-hospital-symbol"></i>
+                <span>AsInAIHB</span>
+            </a>
+            <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="revue.html" class="active">Revue de l'Interne</a></li>
+                <li><a href="soumission.html">Soumission</a></li>
+                <li><a href="membres.html">Espace Membres</a></li>
+                <li id="authLink"><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Connexion</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Search Header -->
+    <div class="revue-search-header">
+        <div class="container">
+            <h1><i class="fas fa-book-medical"></i> Revue de l'Interne</h1>
+            <p class="revue-subtitle">Base de données des publications scientifiques des internes du Bénin</p>
+            
+            <div class="search-box-large">
+                <input type="text" id="searchInput" placeholder="Rechercher par titre, auteur, mot-clé... (ex: paludisme pédiatrie)">
+                <button id="searchBtn" class="btn-search"><i class="fas fa-search"></i> Rechercher</button>
+            </div>
+            <div class="search-tips">
+                <span>💡 Astuces :</span>
+                <code>auteur:Tohodedje</code>
+                <code>année:2024</code>
+                <code>specialite:Pediatrie</code>
+                <a href="#" id="advancedSearchToggle">Recherche avancée ▼</a>
+            </div>
+            
+            <!-- Advanced Search Panel -->
+            <div class="advanced-search" id="advancedSearch" style="display:none;">
+                <div class="adv-row">
+                    <div class="adv-field">
+                        <label>Titre contient</label>
+                        <input type="text" id="advTitle" placeholder="Titre de l'article">
+                    </div>
+                    <div class="adv-field">
+                        <label>Auteur</label>
+                        <input type="text" id="advAuthor" placeholder="Nom de l'auteur">
+                    </div>
+                </div>
+                <div class="adv-row">
+                    <div class="adv-field">
+                        <label>Spécialité</label>
+                        <select id="advSpecialty">
+                            <option value="">Toutes</option>
+                            <option value="Pediatrie">Pédiatrie</option>
+                            <option value="Chirurgie">Chirurgie</option>
+                            <option value="Gyneco-Obstetrique">Gynéco-Obstétrique</option>
+                            <option value="Medecine interne">Médecine interne</option>
+                            <option value="Sante publique">Santé publique</option>
+                            <option value="Anesthesie">Anesthésie-Réanimation</option>
+                            <option value="Dermatologie">Dermatologie</option>
+                            <option value="Ophtalmologie">Ophtalmologie</option>
+                            <option value="ORL">ORL</option>
+                            <option value="Psychiatrie">Psychiatrie</option>
+                            <option value="Radiologie">Radiologie</option>
+                        </select>
+                    </div>
+                    <div class="adv-field">
+                        <label>Type d'article</label>
+                        <select id="advType">
+                            <option value="">Tous</option>
+                            <option value="Article original">Article Original</option>
+                            <option value="Revue de litterature">Revue de littérature</option>
+                            <option value="Cas clinique">Cas clinique</option>
+                            <option value="Meta-analyse">Méta-analyse</option>
+                            <option value="Communication courte">Communication courte</option>
+                            <option value="Editorial">Éditorial</option>
+                        </select>
+                    </div>
+                    <div class="adv-field">
+                        <label>Année</label>
+                        <select id="advYear">
+                            <option value="">Toutes</option>
+                            <option value="2026">2026</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="advSearchBtn"><i class="fas fa-search"></i> Lancer la recherche</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="revue-main">
+        <div class="container revue-layout">
+            <!-- Sidebar Filters -->
+            <aside class="revue-sidebar">
+                <div class="filter-box">
+                    <h3><i class="fas fa-filter"></i> Filtres</h3>
+                    
+                    <div class="filter-group">
+                        <h4>Date de publication</h4>
+                        <label class="filter-item"><input type="radio" name="filterDate" value="1year"> Dernière année</label>
+                        <label class="filter-item"><input type="radio" name="filterDate" value="5years"> 5 dernières années</label>
+                        <label class="filter-item"><input type="radio" name="filterDate" value="10years"> 10 dernières années</label>
+                        <label class="filter-item"><input type="radio" name="filterDate" value="all" checked> Toutes</label>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Type d'article</h4>
+                        <div id="typeFilters"></div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Spécialité</h4>
+                        <div id="specialtyFilters"></div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h4>Texte disponible</h4>
+                        <label class="filter-item"><input type="checkbox" id="filterFree"> Texte complet libre</label>
+                        <label class="filter-item"><input type="checkbox" id="filterMember"> PDF membre (connecté)</label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Results -->
+            <main class="revue-results">
+                <div class="results-header">
+                    <span id="resultsCount">Chargement...</span>
+                    <div class="results-sort">
+                        <label>Trier par :</label>
+                        <select id="sortSelect">
+                            <option value="relevance">Meilleure correspondance</option>
+                            <option value="date_desc">Date (plus récent)</option>
+                            <option value="date_asc">Date (plus ancien)</option>
+                            <option value="author">Auteur (A-Z)</option>
+                        </select>
+                        <select id="perPage">
+                            <option value="10">10 / page</option>
+                            <option value="20">20 / page</option>
+                            <option value="50">50 / page</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="articlesList">
+                    <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Chargement des articles...</div>
+                </div>
+                
+                <div class="pagination" id="pagination"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Article Modal -->
+    <div class="modal" id="articleModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 AsInAIHB - Revue de l'Interne - ISSN en cours d'attribution</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/js/js/supabase.js"></script>
+    <script src="js/js/auth.js"></script>
+    <script src="js/js/revue.js"></script>
+</body>
+</html>
