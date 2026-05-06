@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Inscription AsInAIHB</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: Arial; max-width: 500px; margin: 50px auto; padding: 20px; }
+        input, button { display: block; width: 100%; padding: 10px; margin: 10px 0; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h2>Test d'inscription - AsInAIHB</h2>
+    <div id="message"></div>
+    
+    <input type="text" id="firstName" placeholder="Prénom" required>
+    <input type="text" id="lastName" placeholder="Nom" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Mot de passe (min 6 caractères)" required>
+    <button onclick="signUp()">S'inscrire</button>
+
+    <hr>
+    <h3>Déjà inscrit ?</h3>
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Mot de passe">
+    <button onclick="signIn()">Se connecter</button>
+
+    <script>
+        // Configuration Supabase - À MODIFIER avec vos vraies clés !
+        const SUPABASE_URL = 'https://lmqwpsnjyoktebtmsvga.supabase.co';
+        const SUPABASE_ANON_KEY = 'VOTRE_CLE_ANON_ICI';  // ⚠️ À remplacer !
+        
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        async function signUp() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            
+            const message = document.getElementById('message');
+            
+            // 1. Créer l'utilisateur dans Auth
+            const { data: authData, error: authError } = await supabase.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                    data: {
+                        first_name: firstName,
+                        last_name: lastName
+                    }
+                }
+            });
+            
+            if (authError) {
+                message.innerHTML = `<p class="error">❌ Erreur: ${authError.message}</p>`;
+                return;
+            }
+            
+            message.innerHTML = `<p class="success">✅ Compte créé ! Redirection... Vérifiez votre email si la confirmation est activée.</p>`;
+            
+            // 2. Créer le profil dans la table members
+            if (authData.user) {
+                const { error: profileError } = await supabase
+                    .from('members')
+                    .insert([{
+                        id: authData.user.id,
+                        email: email,
+                        first_name: firstName,
+                        last_name: lastName,
+                        role: 'member'
+                    }]);
+                
+                if (profileError) {
+                    console.error('Erreur profil:', profileError);
+                    message.innerHTML += `<p class="error">⚠️ Profil non créé: ${profileError.message}</p>`;
+                } else {
+                    message.innerHTML += `<p class="success">✅ Profil créé avec succès !</p>`;
+                }
+            }
+        }
+        
+        async function signIn() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const message = document.getElementById('message');
+            
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password
+            });
+            
+            if (error) {
+                message.innerHTML = `<p class="error">❌ Erreur: ${error.message}</p>`;
+            } else {
+                message.innerHTML = `<p class="success">✅ Connecté ! Bienvenue ${data.user.email}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
