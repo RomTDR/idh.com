@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Événements - AsInAIHB</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Styles supplémentaires pour la page événements */
+    .event-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .event-card:hover {
+      transform: translateY(-5px);
+    }
+    .past-event {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      transition: transform 0.2s;
+    }
+    .past-event:hover {
+      transform: translateX(5px);
+    }
+    .call-card {
+      background: linear-gradient(135deg, #004225, #009E60);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Bande tricolore Bénin -->
+  <div class="bande-tricolore"></div>
+
+  <!-- En-tête -->
+  <header class="header-africain">
+    <div class="conteneur-entete">
+      <img src="AsInAIHB.png" alt="Logo Association" class="logo-association">
+      <h1 class="titre-association">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
+    </div>
+    <nav class="menu-africain">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="revue.html">Publications</a></li>
+        <li><a href="evenements.html" class="active">Événements</a></li>
+        <li><a href="soumission.html">Soumettre un résumé</a></li>
+        <li><a href="membres.html" class="btn-login"><i class="fas fa-user"></i> Espace Membre</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Section Événements à venir -->
+    <section class="mot-president">
+      <h2>📅 Événements à venir</h2>
+      <div class="events-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 30px;">
+        
+        <!-- Événement 1 - JSA 2025 -->
+        <div class="event-card">
+          <div style="background: #004225; height: 6px;"></div>
+          <div style="padding: 25px;">
+            <div style="background: #DA121A; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+              <i class="fas fa-calendar-alt fa-2x" style="color: white;"></i>
+            </div>
+            <h3 style="color: #004225; margin-bottom: 10px; font-size: 1.2rem;">Journées Scientifiques Annuelles 2025</h3>
+            <p style="color: #DA121A; font-weight: bold; margin: 8px 0;">
+              <i class="fas fa-calendar"></i> 12-14 Décembre 2025
+            </p>
+            <p style="margin: 8px 0;">
+              <i class="fas fa-map-marker-alt"></i> CNHU-HKM, Cotonou
+            </p>
+            <p style="margin: 15px 0; color: #555;">Thème : "Innovations en santé au Bénin : défis et perspectives"</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin: 15px 0;">
+              <span style="background: #FFD700; color: #004225; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold;">Congrès</span>
+              <span style="background: #004225; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem;">Appel à communications</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="alert('📝 Inscription ouverte prochainement. Restez connectés !')">
+              <i class="fas fa-ticket-alt"></i> S'inscrire
+            </button>
+          </div>
+        </div>
+
+        <!-- Événement 2 - Atelier -->
+        <div class="event-card">
+          <div style="background: #009E60; height: 6px;"></div>
+          <div style="padding: 25px;">
+            <div style="background: #FFD700; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+              <i class="fas fa-chalkboard-user fa-2x" style="color: #004225;"></i>
+            </div>
+            <h3 style="color: #004225; margin-bottom: 10px; font-size: 1.2rem;">Atelier de Formation en Rédaction Scientifique</h3>
+            <p style="color: #DA121A; font-weight: bold; margin: 8px 0;">
+              <i class="fas fa-calendar"></i> 15 Mars 2025
+            </p>
+            <p style="margin: 8px 0;">
+              <i class="fas fa-video"></i> En ligne (Zoom)
+            </p>
+            <p style="margin: 15px 0; color: #555;">Apprenez les techniques de publication dans les revues indexées</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin: 15px 0;">
+              <span style="background: #FFD700; color: #004225; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold;">Atelier</span>
+              <span style="background: #009E60; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem;">Certificat</span>
+            </div>
+            <button class="btn btn-secondary" style="width: 100%; margin-top: 15px;" onclick="alert('📝 Pré-inscription ouverte. Remplissez le formulaire de contact.')">
+              <i class="fas fa-pen"></i> Pré-inscription
+            </button>
+          </div>
+        </div>
+
+        <!-- Événement 3 - Conférence -->
+        <div class="event-card">
+          <div style="background: #DA121A; height: 6px;"></div>
+          <div style="padding: 25px;">
+            <div style="background: #004225; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+              <i class="fas fa-microphone-alt fa-2x" style="color: white;"></i>
+            </div>
+            <h3 style="color: #004225; margin-bottom: 10px; font-size: 1.2rem;">Conférence Internationale de Pédiatrie</h3>
+            <p style="color: #DA121A; font-weight: bold; margin: 8px 0;">
+              <i class="fas fa-calendar"></i> 20-22 Juin 2025
+            </p>
+            <p style="margin: 8px 0;">
+              <i class="fas fa-map-marker-alt"></i> Palais des Congrès, Cotonou
+            </p>
+            <p style="margin: 15px 0; color: #555;">En partenariat avec la SFMP et l'UNICEF Bénin</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin: 15px 0;">
+              <span style="background: #FFD700; color: #004225; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold;">Conférence</span>
+              <span style="background: #DA121A; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem;">International</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 15px;" onclick="alert('🌍 Conférence internationale - Inscriptions à partir de Janvier 2025')">
+              <i class="fas fa-globe"></i> S'inscrire
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section Événements passés -->
+    <section style="background: #f5f5f5; padding: 50px 20px;">
+      <div style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="color: #004225; margin-bottom: 30px; display: flex; align-items: center; gap: 10px;">
+          <i class="fas fa-history" style="color: #DA121A;"></i> Événements passés
+        </h2>
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+          <div class="past-event">
+            <div>
+              <h3 style="color: #004225; margin-bottom: 5px;">Journées Scientifiques Annuelles 2024</h3>
+              <p><i class="fas fa-calendar"></i> 15-17 Décembre 2024 | CNHU-HKM, Cotonou</p>
+            </div>
+            <a href="#" class="btn btn-outline" style="padding: 8px 20px;">📄 Voir les actes</a>
+          </div>
+          <div class="past-event">
+            <div>
+              <h3 style="color: #004225; margin-bottom: 5px;">Atelier de Statistique Médicale</h3>
+              <p><i class="fas fa-calendar"></i> 10 Octobre 2024 | En ligne</p>
+            </div>
+            <a href="#" class="btn btn-outline" style="padding: 8px 20px;">📥 Télécharger les supports</a>
+          </div>
+          <div class="past-event">
+            <div>
+              <h3 style="color: #004225; margin-bottom: 5px;">Congrès de la Société Béninoise de Pédiatrie</h3>
+              <p><i class="fas fa-calendar"></i> 5-7 Septembre 2024 | Cotonou</p>
+            </div>
+            <a href="#" class="btn btn-outline" style="padding: 8px 20px;">📖 Voir le programme</a>
+          </div>
+          <div class="past-event">
+            <div>
+              <h3 style="color: #004225; margin-bottom: 5px;">Formation en Éthique Médicale</h3>
+              <p><i class="fas fa-calendar"></i> 15 Juin 2024 | CNHU-HKM, Cotonou</p>
+            </div>
+            <a href="#" class="btn btn-outline" style="padding: 8px 20px;">📸 Galerie photos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Appel à communications -->
+    <section class="mot-president">
+      <div class="call-card">
+        <i class="fas fa-envelope-open-text" style="font-size: 3rem; margin-bottom: 15px; color: #FFD700;"></i>
+        <h3 style="color: #FFD700;">📢 Appel à communications</h3>
+        <p style="margin: 15px 0; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Nous invitons tous les internes et anciens internes à soumettre leurs résumés pour les <strong>Journées Scientifiques Annuelles 2025</strong>.
+        </p>
+        <p><strong>📅 Date limite : 31 Mai 2025</strong></p>
+        <a href="soumission.html" class="btn" style="background: #FFD700; color: #004225; margin-top: 20px; display: inline-block; font-weight: bold;">
+          <i class="fas fa-upload"></i> Soumettre un résumé
+        </a>
+      </div>
+    </section>
+
+    <!-- Informations de contact -->
+    <div class="infos-contact">
+      <p><i class="fas fa-envelope"></i> asinainhb.jib@gmail.com</p>
+      <p><i class="fas fa-phone"></i> +229 0140424297</p>
+      <p><i class="fas fa-map-marker-alt"></i> Cotonou, Bénin</p>
+      <p><i class="far fa-clock"></i> Lun-Ven: 08:00-18:00 | Sam: 08:00-13:00</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <img src="AsInAIHB.png" alt="Logo AsInAIHB" class="footer-logo">
+        <p><strong>📍 Localisation :</strong> Cotonou, Bénin</p>
+        <p><strong>⏰ Horaires :</strong></p>
+        <p>Lundi – Vendredi : 08:00 – 18:00</p>
+        <p>Samedi : 08:00 – 13:00</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>🏥 AsInAIHB</h4>
+        <ul>
+          <li><a href="#">Qui sommes-nous ?</a></li>
+          <li><a href="#">Bureau exécutif</a></li>
+          <li><a href="#">Fonctionnement</a></li>
+          <li><a href="#">Adhésion</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>📖 Revue de l'interne</h4>
+        <ul>
+          <li><a href="#">Instructions aux auteurs</a></li>
+          <li><a href="soumission.html">Soumission</a></li>
+          <li><a href="revue.html">Archives</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>🔗 Liens utiles</h4>
+        <ul>
+          <li><a href="#">Conditions d'utilisation</a></li>
+          <li><a href="#">Politique des données</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-social">
+      <h4>📱 Suivez-nous</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-x-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top: 20px; font-size: 0.75rem;">
+      <p>© 2024 AsInAIHB - Association des Internes et Anciens Internes des Hôpitaux du Bénin - Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script>
+    // Menu mobile
+    document.addEventListener('DOMContentLoaded', function() {
+      // Gestion du menu mobile si nécessaire
+      console.log('Page événements chargée');
+    });
+  </script>
+</body>
+</html>
