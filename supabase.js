@@ -4,8 +4,8 @@
 // ========================================
 
 // Configuration - À MODIFIER avec vos identifiants Supabase
-var SUPABASE_URL = 'https://votre-projet.supabase.co';
-var SUPABASE_ANON_KEY = 'votre-cle-anon-ici';
+var SUPABASE_URL = 'sb_publishable_cAs09LNvLy8jbJxOO4NPmg_0sy-SjBb';
+var SUPABASE_ANON_KEY = 'sb_publishable_cAs09LNvLy8jbJxOO4NPmg_0sy-SjBb';
 
 var supabaseClient = null;
 
