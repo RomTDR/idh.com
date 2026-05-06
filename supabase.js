@@ -4,7 +4,7 @@
 // ========================================
 
 // Configuration - À MODIFIER avec vos identifiants Supabase
-var SUPABASE_URL = 'sb_publishable_cAs09LNvLy8jbJxOO4NPmg_0sy-SjBb';
+var SUPABASE_URL = 'https://lmqwpsnjyoktebtmsvga.supabase.co';
 var SUPABASE_ANON_KEY = 'sb_publishable_cAs09LNvLy8jbJxOO4NPmg_0sy-SjBb';
 
 var supabaseClient = null;
