@@ -3,106 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publications - AsInAIHB</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  <title>Revue de l'Interne Béninois - AsInAIHB</title>
+  <meta http-equiv="refresh" content="0; url=revue_interne_benin.html">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f2744 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top-color: #c9a227;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    h1 { font-size: 1.5rem; margin-bottom: 10px; }
+    p { opacity: 0.8; }
+    a { color: #c9a227; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
 </head>
 <body>
-  <!-- Bande tricolore -->
-  <div class="bande-tricolore"></div>
-
-  <!-- En-tête -->
-  <header class="header-africain">
-    <div class="conteneur-entete">
-      <img src="AsInAIHB.png" alt="Logo" class="logo-association" style="height:70px;">
-      <h1 class="titre-association">Association des Internes et Anciens Internes des Hôpitaux du Bénin</h1>
-    </div>
-    <nav class="menu-africain">
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="revue.html" class="active">Publications</a></li>
-        <li><a href="evenements.html">Événements</a></li>
-        <li><a href="soumission.html">Soumettre</a></li>
-        <li><a href="membres.html" class="btn-login">Espace Membre</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <!-- Header recherche -->
-  <div style="background: #004225; padding: 40px 20px; text-align: center; color: white;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <h1><i class="fas fa-book-medical"></i> Revue de l'Interne</h1>
-      <p>Publications scientifiques des internes du Bénin</p>
-      <div style="display: flex; max-width: 600px; margin: 20px auto; border-radius: 50px; overflow: hidden;">
-        <input type="text" id="searchInput" placeholder="Rechercher..." style="flex:1; padding: 12px 20px; border: none;">
-        <button id="searchBtn" style="background: #FFD700; border: none; padding: 0 25px; cursor: pointer; font-weight: bold;">Rechercher</button>
-      </div>
-    </div>
+  <div>
+    <div class="loader"></div>
+    <h1>Revue de l'Interne Béninois</h1>
+    <p>Redirection vers le nouveau site...</p>
+    <p style="margin-top: 20px; font-size: 0.9rem;">
+      Si la redirection ne fonctionne pas, <a href="revue_interne_benin.html">cliquez ici</a>
+    </p>
   </div>
-
-  <!-- Contenu principal -->
-  <div style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
-    <div style="display: flex; flex-wrap: wrap; gap: 30px;">
-      
-      <!-- Sidebar filtres -->
-      <aside style="width: 260px;">
-        <div style="background: white; border-radius: 16px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          <h3 style="color: #004225;"><i class="fas fa-filter"></i> Filtres</h3>
-          <div style="margin: 15px 0;">
-            <h4>Spécialité</h4>
-            <div id="specialtyFilters"></div>
-          </div>
-          <div style="margin: 15px 0;">
-            <h4>Type d'article</h4>
-            <div id="typeFilters"></div>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Résultats -->
-      <main style="flex: 1;">
-        <div id="articlesList" style="display: flex; flex-direction: column; gap: 20px;">
-          <div style="text-align: center; padding: 50px;">Chargement des articles...</div>
-        </div>
-        <div id="pagination" style="display: flex; justify-content: center; gap: 10px; margin-top: 30px;"></div>
-      </main>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-col">
-        <img src="AsInAIHB.png" alt="Logo" class="footer-logo" style="width:60px;">
-        <p><strong>Cotonou, Bénin</strong></p>
-        <p>Lun-Ven: 08:00-18:00</p>
-        <p>Sam: 08:00-13:00</p>
-      </div>
-      <div class="footer-col">
-        <h4>AsInAIHB</h4>
-        <ul><li><a href="#">Qui sommes-nous ?</a></li></ul>
-      </div>
-      <div class="footer-col">
-        <h4>Revue</h4>
-        <ul><li><a href="soumission.html">Soumettre</a></li></ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul><li><a href="contacts.html">Nous contacter</a></li></ul>
-      </div>
-    </div>
-    <div class="footer-social">
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
-    </div>
-    <div class="text-center" style="margin-top: 20px;">© 2024 AsInAIHB</div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase.js"></script>
-  <script src="revue.js"></script>
 </body>
 </html>
